@@ -75,7 +75,7 @@ def get_highlighted_text(annotation, nb_page, doc, bavard = False) :
 ### PB to access the real file 
 def base_extractor(file) : 
     
-    doc = fitz.open(file)
+  #  doc = fitz.open(file)
     
     highlight_text = []
 # Total page in the pdf
@@ -85,7 +85,7 @@ def base_extractor(file) :
     dic = {}
 
 
-    for page in doc :
+    for page in file :
    
             # list to store the co-ordinates of all highlights
         highlights = {}
