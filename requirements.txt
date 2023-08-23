@@ -1,1 +1,14 @@
-altair==4.0
+docx==0.2.4
+docx2txt==0.8
+fpdf==1.7.2
+langchain==0.0.271
+nltk==3.8.1
+openai==0.27.8
+PyMuPDF==1.22.5
+PyPDF2==3.0.1
+python-dotenv==1.0.0
+python_docx==0.8.11
+stqdm==0.0.5
+streamlit==1.25.0
+tiktoken==0.4.0
+tqdm==4.65.0
