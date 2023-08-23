@@ -73,9 +73,10 @@ def get_highlighted_text(annotation, nb_page, doc, bavard = False) :
     return sentence
 
 ### PB to access the real file 
-def base_extractor(file) : 
+def base_extractor(fil) : 
     
   #  doc = fitz.open(file)
+    pdf_data = fil.read()
     
     highlight_text = []
 # Total page in the pdf
@@ -84,55 +85,55 @@ def base_extractor(file) :
 
     dic = {}
 
-
-    for page in file :
-   
-            # list to store the co-ordinates of all highlights
-        highlights = {}
-        
-        # loop till we have highlight annotation in the page
-        annot = page.first_annot 
-        
+    with fitz.open(stream=pdf_data, filetype="pdf") as file:
+        for page in file :
        
-        while annot : 
-            texte = annot.info["content"]
+                # list to store the co-ordinates of all highlights
+            highlights = {}
             
+            # loop till we have highlight annotation in the page
+            annot = page.first_annot 
             
-            if annot.type[0] == 8:
-                all_coordinates = annot.vertices
-                if len(all_coordinates) == 4:
-                    highlight_coord = fitz.Quad(all_coordinates).rect
-                    highlights[highlight_coord] = texte
-                    
-                else:
-                    all_coordinates = [all_coordinates[x:x+4] for x in range(0, len(all_coordinates), 4)]
-                    for i in range(0,len(all_coordinates)):
-                        coord = fitz.Quad(all_coordinates[i]).rect
-                        highlights[coord] = texte
+           
+            while annot : 
+                texte = annot.info["content"]
+                
+                
+                if annot.type[0] == 8:
+                    all_coordinates = annot.vertices
+                    if len(all_coordinates) == 4:
+                        highlight_coord = fitz.Quad(all_coordinates).rect
+                        highlights[highlight_coord] = texte
                         
-           
-           
-            annot = annot.next
+                    else:
+                        all_coordinates = [all_coordinates[x:x+4] for x in range(0, len(all_coordinates), 4)]
+                        for i in range(0,len(all_coordinates)):
+                            coord = fitz.Quad(all_coordinates[i]).rect
+                            highlights[coord] = texte
+                            
+               
+               
+                annot = annot.next
+                
+              
             
-          
-        
-        
-        all_words = page.get_text("words")
-        
-        
-        
-        # List to store all the highlighted texts
-        
-        
-        for h in highlights.keys():
-        
-            sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(h)]
-            texte_annot = (" ".join(sentence))
-            dic[texte_annot] = highlights[h]
-          
-           
-        
-    return dic
+            
+            all_words = page.get_text("words")
+            
+            
+            
+            # List to store all the highlighted texts
+            
+            
+            for h in highlights.keys():
+            
+                sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(h)]
+                texte_annot = (" ".join(sentence))
+                dic[texte_annot] = highlights[h]
+              
+               
+            
+        return dic
  
 def sort_dict_by_values(input_dict):
     sorted_dict = dict(sorted(input_dict.items(), key=lambda item: item[1]))
