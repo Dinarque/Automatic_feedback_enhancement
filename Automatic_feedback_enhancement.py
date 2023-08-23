@@ -295,6 +295,7 @@ else :
             if st.button("Come back to the menu") : 
                 display_menu(True)
                 set_mission(False)
+                st.write("here we go again")
                 st.experimental_rerun() 
     ## stat
 
