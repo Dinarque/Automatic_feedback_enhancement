@@ -4,12 +4,12 @@ Created on Mon Apr  3 05:05:31 2023
 
 @author: 3b13j
 """
+import streamlit as st
 
 import PyPDF2
 import fitz
 import re
 import nltk
-nltk.download('punkt')
 from annotation import comment
 
 def get_composition(pdf_file, bavard = False) : 
@@ -48,177 +48,50 @@ def get_composition(pdf_file, bavard = False) :
     return text
     
     
-  
-def get_highlighted_text(annotation, nb_page, doc, bavard = False) :
+
+def base_extractor(path) : 
+    
+    
     
 
-    
-    doc = fitz.open(doc)
-    pag = doc[nb_page]
-    all_words = pag.get_text("words")
-   # print("all words")
-    #print(all_words)
-    
-    if bavard :
-        print(all_words)
-        print()
-        print(annotation)
-    
-    h = annotation['/Rect']
-    h = fitz.Rect(h)
+        
     
     
-    sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(h)]   
-    sentence = " ".join(sentence)
-    
-    return sentence
+    chunks = {}
 
-### PB to access the real file 
-def base_extractor(fil) : 
-    
-  #  doc = fitz.open(file)
-    pdf_data = fil.read()
-    
-    highlight_text = []
-# Total page in the pdf
-   
-# taking page for further processing
+    pdf_document = fitz.open(path)
 
-    dic = {}
+    for page_n in range(pdf_document.page_count):
+        page = pdf_document.load_page(page_n)
+        page_annotations = page.annots()
 
-    with fitz.open(stream=pdf_data, filetype="pdf") as file:
-        for page in file :
-       
-                # list to store the co-ordinates of all highlights
-            highlights = {}
+        # Get all words on the current page
+        words = page.get_text("words")
+
+        # Iterate through annotations on the current page
+        for annot in page_annotations:
             
-            # loop till we have highlight annotation in the page
-            annot = page.first_annot 
-            
+            rect = annot.rect
+            words_under_annot = [word for word in words if fitz.Rect(word[:4]).intersects(rect)]
+            highlight = " ".join(word[4] for word in words_under_annot)
+
+            # Extract the content of other annotations if available
            
-            while annot : 
-                texte = annot.info["content"]
-                
-                
-                if annot.type[0] == 8:
-                    all_coordinates = annot.vertices
-                    if len(all_coordinates) == 4:
-                        highlight_coord = fitz.Quad(all_coordinates).rect
-                        highlights[highlight_coord] = texte
-                        
-                    else:
-                        all_coordinates = [all_coordinates[x:x+4] for x in range(0, len(all_coordinates), 4)]
-                        for i in range(0,len(all_coordinates)):
-                            coord = fitz.Quad(all_coordinates[i]).rect
-                            highlights[coord] = texte
-                            
-               
-               
-                annot = annot.next
-                
-              
-            
-            
-            all_words = page.get_text("words")
-            
-            
-            
-            # List to store all the highlighted texts
-            
-            
-            for h in highlights.keys():
-            
-                sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(h)]
-                texte_annot = (" ".join(sentence))
-                dic[texte_annot] = highlights[h]
-              
-               
-            
-        return dic
+            content = annot.info.get("content", "")
+
+          
+
+            chunks[highlight] = content
+
+  
+   
+    return chunks
  
 def sort_dict_by_values(input_dict):
     sorted_dict = dict(sorted(input_dict.items(), key=lambda item: item[1]))
     return sorted_dict
 
-def processing(path, texte, return_obj = True) :
-    
-    #texte = get_composition(path)  
-    dick = base_extractor(path)
-    
-    
-    """ on a besoin de trois données en parallèle pour lancer les querries : 
-        le commentaire, la portion strictement délimitée, mais aussi la phrase entière.
-    On va essayer de récupérer cette dernière information ici
-    """
-    print("teub")
-    print(texte)
-    
-    texte = nltk.sent_tokenize(texte)
-    
-    high_2_sent = {}
-    
-    for high in dick.keys() :
-        for sentence in texte : 
-            if high in sentence : 
-                high_2_sent[high] = sentence
-                
-    high_2_sent = sort_dict_by_values(high_2_sent)
-   
-    
-    """
-    nd = {} 
-    
-    for sent in texte :
-        if sent in high_2_sent.values() :
-            for key in high_2_sent.keys() :
-                if high_2_sent[key] == sent :
-                    nd[key] = sent 
-    high_2_sent = nd
-   
-    
-    for k in high_2_sent.keys() :
-        print( "key : ",   k ,"\n", "value : ",  high_2_sent[k] , "\n" )
-    """
-    
-    
-   
-    
-    if  not return_obj  :
-        for k in dick.keys() :
-            print()
-            print (k)
-            print(high_2_sent[k])
-            print(dick[k])
-    
-   
-    else : 
-        comments = []
-        c = 0
-        
-        """
-        for k in dick.keys() :
-            com = comment(c)
-            com.highlight = k 
-            com.annot = dick[k]
-            if k in high_2_sent.keys() : com.sentence = high_2_sent[k]
-            else : com.sentence = ""
-            comments.append(com)
-            c += 1
-        """
-        
-        for k in high_2_sent.keys() :
-            com = comment(c)
-            com.highlight = k 
-            com.sentence = high_2_sent[k]
-            
-            
-            if k in dick.keys() : com.annot = dick[k]
-            else : com.annot = ""
-            comments.append(com)
-            c += 1
-            
-            
-        return comments
+
     
 def common(list1, list2) :
     
@@ -232,10 +105,3 @@ def uncommon(list1, list2) :
         if element not in list2:
             print(element)            
     
-    
-"""
-
-PB : some stupid student do not use punctuation properly
-
-Solution  ; utiliser un parseur d'entités nommées pour essayer de couper après les majuscules...'
-"""
