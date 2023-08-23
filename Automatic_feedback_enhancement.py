@@ -18,9 +18,8 @@ button= False
 ## imports 
 
 import streamlit as st
-from tqdm import tqdm
 import os
-from  pdf_extractor_done import get_composition, processing
+from  pdf_extractor_done import get_composition, processing, base_extractor
 from dotenv import load_dotenv , find_dotenv 
 load_dotenv(find_dotenv(), override=True)
 from displaying_tools import just, l, centered_title, title, centered_button,  colour_html, add_alinea
@@ -29,8 +28,7 @@ from content_analysis import get_data, create_review
 
 if Link_2_GPT : 
     from gpt_pipeline import correction_prompt, correction_prompt2, sum_up, create_extra, streamlit_chat, update_cost, create_exo
-else : 
-    from prompts import  correction_prompt
+
 from stqdm import stqdm
 
 
@@ -69,8 +67,11 @@ def display_menu (bol = True):
     st.session_state.display_menu = bol
  
 def launch_extraction() :
+    with open("buffer.pdf", "wb") as f:
+        f.write(st.session_state.file.getbuffer())
     st.session_state.str_file = pdf_read(st.session_state.file)
-    st.session_state.chunks = processing(st.session_state.file, st.session_state.str_file)
+    st.session_state.chunks= base_extractor("buffer.pdf")
+    st.session_state.nb_chunks = len(st.session_state.chunks)
     
 
 def cleanse(session_state) : 
@@ -131,9 +132,10 @@ with st.sidebar :
         if file is not None and file.name != st.session_state.buffer :
             if  lb.button(label="launch feedback") :
                 cleanse(st.session_state)
-                display_menu(True)
+                lb.download_button( "copycat", data=file, file_name='copycat.pdf')
+                #display_menu(True)
                 st.subheader ("we re clean")
-                launch_extraction()
+                h = launch_extraction()
                 path = create_log(file.name)
                 st.session_state.name = st.session_state.file.name
                
@@ -273,13 +275,10 @@ else :
         sentences = [com.sentence for com in st.session_state.chunks]
         segments = [com.highlight for com in st.session_state.chunks]
         
-        text = st.session_state.str_file
-        ### TO DO remettre surlignage
-
-        """
+        text = ""
         for i in range (len(sentences)) :
             text += colour_html(sentences[i], segments[i])
-        """
+        
         l(add_alinea(text) )
         "___"
         
@@ -294,15 +293,11 @@ else :
             if st.button("proceed to correction ?") : 
                 set_mission("cor")
                 st.experimental_rerun() 
-
-        """
         with right : 
             if st.button("Come back to the menu") : 
                 display_menu(True)
                 set_mission(False)
-                st.write("here we go again")
                 st.experimental_rerun() 
-        """
     ## stat
 
     elif st.session_state.mission == "stat" :
