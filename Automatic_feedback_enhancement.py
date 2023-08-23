@@ -273,10 +273,13 @@ else :
         sentences = [com.sentence for com in st.session_state.chunks]
         segments = [com.highlight for com in st.session_state.chunks]
         
-        text = ""
+        text = st.session_state.str_file
+        ### TO DO remettre surlignage
+
+        """
         for i in range (len(sentences)) :
             text += colour_html(sentences[i], segments[i])
-        
+        """
         l(add_alinea(text) )
         "___"
         
