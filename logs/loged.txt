@@ -1,0 +1,197 @@
+"0":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Aussi, ça permet aux mers de communiquer sans satellite.",
+  'Label': 'Preposition error',
+  'Explanation': "The preposition 'de' is required after the verb 'permettre' to indicate the action of communicating. Additionally, the article 'les' should be replaced with the preposition 'aux' to indicate communication between the seas."
+}"
+"1":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "C'est très bizarre qu'une baleine fasse ça.",
+  'Label': 'preposition',
+  'Explanation': "The correct preposition to use in this context is 'qu' (que) instead of 'pour'."
+}"
+"2":"{
+  'Type': 'vocabulary',
+  'Corrected Sentence': "C'est très bizarre pour une baleine de faire ça.",
+  'Label': {
+    'Incorrect Word': 'une',
+    'Correct Word': 'ça',
+    'English Equivalents': ['that', 'it']
+  },
+  'Explanation': "The word 'une' should be replaced with 'ça' in this context. 'Ça' is used to refer to an action or situation, while 'une' is used to refer to a specific object or person. In this case, we are talking about the action of a whale, so we should use 'ça' instead of 'une'."
+}"
+"3":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "C'est très bizarre pour une baleine de faire ça.",
+  'Label': 'Incomplete sentence',
+  'Explanation': "The sentence 'C'est très bizarre pour une baleine de faire.' is incomplete. It lacks a direct object after the verb 'faire'. To make the sentence grammatically correct, you need to add a direct object. In this case, I added 'ça' which means 'it' in English."
+}"
+"4":"{
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Heureusement, il a saisi les réserves et les essentielles et les matériels de communication.",
+  'Label': {
+    'Incorrect Word': 'essentielles',
+    'Correct Word': 'de communication',
+    'English Equivalents': ['communication materials']
+  },
+  'Explanation': "The word 'essentielles' is incorrect in this context. Instead, you should use 'de communication' to indicate that the materials are for communication purposes. The correct sentence would be 'Heureusement, il a saisi les réserves et les essentielles et les matériels de communication.'"
+}"
+"5":"{
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Heureusement, il a pris les réserves essentielles et le matériel de communication.",
+  'Label': {
+    'saisi': 'pris',
+    'les matériels pour communication': 'le matériel de communication',
+    'anglicisme': 'anglicism'
+  },
+  'Explanation': "In French, the verb 'saisir' is not commonly used to mean 'to take'. The correct verb to use in this context is 'prendre' which means 'to take'. Additionally, the word 'matériels' should be changed to 'matériel' as it is singular. Finally, instead of saying 'les réserves et les essentielles', it is more appropriate to say 'les réserves essentielles' to avoid repetition."
+}"
+"6":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé, pendant ce temps l'équipage mangeait une pizza.",
+  'Label': 'Subject-verb agreement',
+  'Explanation': "The verb 'voyageais' should be changed to 'voyageait' to agree with the subject 'Il', which is the third-person singular pronoun. Additionally, 'de les' should be changed to 'des' to indicate 'from the' in a plural form. 'Un pizza' should be changed to 'une pizza' to match the gender of the noun 'pizza'. Lastly, a comma should be added after 'frappé' to separate the two clauses in the sentence."
+}"
+"7":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'Combinaison incorrecte des articles',
+  'Explanation': "L'erreur se trouve dans la combinaison des articles. Au lieu de 'de les', on utilise 'des' pour exprimer la possession ou l'origine. De plus, 'un pizza' doit être corrigé en 'une pizza' pour accorder le genre avec le mot 'pizza' qui est féminin." 
+}"
+"8":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'Preposition usage',
+  'Explanation': "In French, when expressing movement towards a country or region, we use the preposition 'en' instead of 'à'. So it should be 'à la Polynésie française' instead of 'à Polynésie française'. Additionally, 'il voyageait' is the correct form for the verb 'voyager' in the past tense. The verb 'manger' should be conjugated as 'mangeait' for the third person singular form. Lastly, 'un pizza' should be 'une pizza' to match the gender of the noun."
+}"
+"9":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'Preposition error',
+  'Explanation': "The incorrect use of the preposition 'de les' should be replaced with 'des' to indicate 'from the'. Additionally, 'un pizza' should be corrected to 'une pizza' to match the gender agreement."
+}"
+"10":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé pendant ce temps l'équipage mangeait une pizza.",
+  'Label': 'Subject-verb agreement',
+  'Explanation': "The verb 'mangeais' should agree with the subject 'l'équipage' in number and tense. Therefore, it should be 'mangeait' to match the singular third person subject." 
+}"
+"11":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé, pendant ce temps l'équipage mangeait une pizza.",
+  'Label': 'Object of the sentence',
+  'Explanation': "The verb 'frappé' is in the past participle form, which is used in compound tenses. However, in this sentence, 'a frappé' should be the main verb of the sentence, indicating the action of the boat hitting something. To make it the main verb, we need to change 'voyageais' to 'voyageait' and 'mangeais' to 'mangeait' to match the verb tense. Additionally, 'un pizza' should be 'une pizza' to match the feminine noun. Finally, 'de les' should be changed to 'des' to indicate 'from the' in the context of the Galápagos islands."
+}"
+"12":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé, pendant ce temps l'équipage mangeait une pizza.",
+  'Label': 'Subject-verb agreement and article usage',
+  'Explanation': "The correct form of the verb 'voyager' in the past tense is 'voyageait' (agreement with 'il'). The correct preposition to use with 'îles' is 'des' instead of 'de les'. 'Polynésie française' should be preceded by the article 'la'. The verb 'manger' should be in the imperfect tense 'mangeait' to indicate an ongoing action in the past. The noun 'pizza' should be preceded by the indefinite article 'une'."
+}"
+"13":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'La baleine frappée par un bateau. Un désastre de Mark Smolinski. Dans l’océan Pacifique, le voilier de Rick Rodriguez est entré en collision avec une baleine.',
+  'Label': 'Preposition error',
+  'Explanation': 'The correct preposition to use with "entré" is "en". Therefore, the correct phrase is "entré en collision" which means "collided". Additionally, the word "frapper" should be in the past participle form "frappée" to agree with "la baleine" which is feminine.' 
+}"
+"14":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.',
+  'Label': 'Preposition error',
+  'Explanation': 'The preposition "de" should be replaced with "à" to indicate the distance from Tahiti.'
+}"
+"15":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.",
+  'Label': 'Preposition usage',
+  'Explanation': "In French, when indicating a distance, we use the preposition 'à' instead of 'de'. Therefore, the correct sentence is 'Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.'"
+}"
+"16":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.',
+  'Label': 'Preposition error',
+  'Explanation': 'In French, when indicating a direction or location, we use the preposition "à" instead of "de". Therefore, the correct sentence should be "Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti."'
+}"
+"17":"{
+  'Type': 'vocabulary',
+  'Corrected Sentence': 'Le fabricant de ces appareils a dit que les appareils sont très populaires avec la communauté de marins.',
+  'Label': {
+    'le communité': 'la communauté',
+    'communité': 'community',
+    'marins': 'sailors'
+  },
+  'Explanation': 'The word "communité" should be "communauté" in French. Also, "les appareils sont très populaires avec la communauté de marins" means "the devices are very popular with the community of sailors."'
+}"
+"18":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'Le fabricant de ces appareils a dit que les appareils sont très populaires avec la communauté de marins.',
+  'Label': 'agreement of adjectives',
+  'Explanation': 'In French, adjectives must agree in gender and number with the noun they modify. Since "appareils" is plural, the adjective "populaire" should also be in the plural form "populaires". Additionally, the correct spelling of "communité" is "communauté".'
+}"
+"19":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les appareils comme ça existaient pour les marins récréatifs depuis dix ans.',
+  'Label': 'Verb form',
+  'Explanation': 'The verb form "était exister" is incorrect. The correct form is "existaient" to match the plural subject "Les appareils". Additionally, "pour dix ans" should be replaced with "depuis dix ans" to indicate a duration of time.'
+}"
+"20":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Les autres marins dans la zone avaient réussi dans l'effort de recherches parce qu'ils avaient Internet par satellite.",
+  'Label': 'Conjugation error',
+  'Explanation': "The verb 'avoir' (to have) does not need the auxiliary verb 'eu' in this context. The correct form is 'avaient' (they had)."
+}"
+"21":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les autres marins dans la zone avaient réussi dans l’effort de recherches parce qu’ils avaient eu Internet par satellite.',
+  'Label': 'Anglicisme',
+  'Explanation': 'The phrase "étaient réussis" is a direct translation from English ("were successful"). In French, we use the verb "réussir" without the auxiliary verb "être" to express success. Therefore, the correct form is "avaient réussi" which means "had succeeded".'
+}"
+"22":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Les signaux de détresse ne comptent plus sur les seules agences gouvernementales.",
+  'Label': 'Adverb placement',
+  'Explanation': "In French, adverbs usually come after the verb they modify. Therefore, the adverb 'seule' should come after the noun 'agences gouvernementales' to indicate that only government agencies are no longer counting on distress signals."
+}"
+"23":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les technologies des gouvernements sont vieux.',
+  'Label': 'Agreement error',
+  'Explanation': 'In French, when using the possessive adjective "de" followed by a definite article, the article "de" contracts with the following article. Therefore, it should be "des gouvernements" instead of "de les gouvernements". Also, "vieux" should agree in gender and number with "technologies", so it should be "vie"
+"24":"{
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Mais c’était essentiel que Rodriguez ait l’appareil satellite alimenté par batterie pour appeler son frère.",
+  'Label': {
+    'incorrect_word': 'essential',
+    'correct_word': 'essentiel',
+    'english_equivalents': ['essential', 'crucial', 'vital']
+  },
+  'Explanation': "The word 'essential' in French should be 'essentiel'. It means 'essential' in English, but also has similar meanings like 'crucial' or 'vital'."
+}"
+"25":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Mais c’était essentiel que Rodriguez ait l’appareil satellite alimenté par batterie pour appeler son frère.",
+  'Label': 'article',
+  'Explanation': "The correct form is 'essentiel' instead of 'essential'. In French, the adjective 'essentiel' does not require an article before it."
+}"
+"26":"{
+  'Type': 'grammar',
+  'Corrected Sentence': "Mais c'était essentiel que Rodriguez ait l'appareil satellite alimenté par batterie pour appeler son frère.",
+  'Label': 'Use of the wrong verb form',
+  'Explanation': "The verb 'avoir' (to have) should be conjugated in the present subjunctive form 'ait' instead of the past subjunctive form 'eût'. In this sentence, we are expressing a present or future possibility, so we use the present subjunctive."
+}"
+"27":"{
+    'Type': 'vocabulary',
+    'Corrected Sentence': 'Rodriguez a dit que c’était comme frapper un mur.',
+    'Label': {'frapper': 'heurter', 'strike': 'hit'},
+    'Explanation': 'The word "frapper" can be replaced with "heurter" or "strike" in English.'
+}"
+"28":"{
+  'Type': 'grammar',
+  'Corrected Sentence': 'Rodriguez a dit que c’était comme frapper un mur.',
+  'Label': 'article',
+  'Explanation': 'No correction needed. The article "un" is correctly used in the sentence.'
+}"
+}
+"mission":"cor"
+"language":"English"
+"str_file":"La baleine frapper par un bateau Un désastre De Mark Smolinski Dans l’ocean Pacifique, le voilier de Rick Rodriguez est entré une collision avec une baleine. Le voilier a coulé pendant quinze minutes. Heureusement, il a saisi les réserves et les essentielles et les matériels pour communication. Il avait un petit dispositif satellite qu’il utilisait pour appeler son frère. Son frère était milliers de kilomètre loin, mais il a commencé les recherches pour retrouver Rodrigues. Les autres marins dans la zone étaient réussis dans l’effort de recherches parce qu’ils avaient eu Internet par satellite. Rodriguez a écrit dans son iPhone quand il a sauvé « La technologie a sauvé nous. » Les gens qui aider Rodriguez a discuté comment nouvelle technologies satellite, comme Starlink Internet Systèmes, avait améliorer la communication d’urgence pour les marins bloqués en mer et les gens qui essaient de trouver ils. Un ami de Rodrigues qui s’appelle Tommy Joyce a dit Tous les marins veulent aider, mais ça rend beaucoup plus facile à coordonner et d’aider les plaisanciers en détresse. » Le service de Starlink donne les marins avec les signaux satellite qui atteint les mers et les oceans mondiale. Aussi, ça permet les mers se communiquer sans satellite. Les signals de détresse ne comptent plus sur les agences gouvernement seule. Les technologies de les gouvernements sont vieux. Mais c’était essential que Rodriguez eût l’appareil satellite alimenté par batterie pour appeler son frère. Les appareils comme ça était exister pour les marins récréatifs pour dix ans. Le fabricant de ces appareils a dit que les appareils sont « très populaire avec le communité de marins. » Mais pourquoi la baleine s’est percutée avec le bateau ? C’est très bizarre pour une baleine de faire. La baleine a interrompu un voyage de trois semaine de Rodrigues. Il voyageais de les îles Galápagos à Polynésie française quand le bateau a frappé pendant ce temps l’équipage mangeais un pizza. Rodriguez a dit que c’était comme frapper un mur. Le bateau a coulé 3000 kilomètres sud-est de Tahiti. Tout l’equipage était sauvé."

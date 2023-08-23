@@ -1,0 +1,360 @@
+*1* 
+ {
+  'Type': 'grammar',
+  'Correction': 'Remove "les" before "mers".',
+  'Explanation': 'In this sentence, the word "mers" is used as a direct object, so it does not need the definite article "les".',
+  'Corrected Sentence': 'Aussi, ça permet mers se communiquer sans satellite.'
+}  
+ 
+ 
+*1* 
+ {
+  'Type': 'grammar',
+  'Correction': 'quel est le rôle de ce groupe dans la phrase ?',
+  'Explanation': 'The phrase "les mers" is incorrect in this context. It should be "les personnes" to refer to people communicating, or "les appareils" to refer to devices communicating.',
+  'Corrected Sentence': 'Aussi, ça permet aux personnes de communiquer sans satellite.'
+}  
+ 
+ 
+*2* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "C'est très bizarre qu'une baleine fasse ça.",
+  'Label': 'Preposition usage',
+  'Explanation': "The correct preposition to use in this context is 'qu'' instead of 'pour'. In French, when expressing surprise or disbelief, we use 'qu'' followed by the subjunctive form of the verb. Also, the verb 'faire' should be conjugated as 'fasse' to agree with the subject 'une baleine'."
+}  
+ 
+ 
+*3* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'C’est très bizarre pour une baleine de faire ça.',
+  'Label': 'Missing complement',
+  'Explanation': 'In French, when using the verb "faire" to talk about an action, we need to include a complement. In this case, we can use "ça" to refer to the action the whale is doing.'
+}  
+ 
+ 
+*4* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "C'est très bizarre pour une baleine de faire cela.",
+  'Label': 'Incomplete sentence',
+  'Explanation': "The sentence 'C'est très bizarre pour une baleine de faire.' is incomplete. To make it a complete sentence, you need to add a direct object after the verb 'faire'. In this case, you can use 'cela' which means 'that' in English. So the corrected sentence would be 'C'est très bizarre pour une baleine de faire cela.'"
+}  
+ 
+ 
+*4* 
+ { 
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Heureusement, il a saisi les réserves et les essentiels et les matériels pour la communication.",
+  'Label': {'essentielles': 'essentiels (masculine form)', 'essentiels': 'essential (masculine form)', 'communication': 'communication'},
+  'Explanation': "The word 'essentielles' is the feminine form of 'essentiels'. In this context, we use the masculine form 'essentiels' to agree with the masculine noun 'réserves'. Additionally, 'pour communication' should be corrected to 'pour la communication' to indicate 'for the communication'." 
+}  
+ 
+ 
+*5* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Heureusement, il a pris les réserves essentielles et les matériels de communication.",
+  'Label': 'anglicisme: saisir',
+  'Explanation': 'The correct French word to use in this context is "prendre" which means "to take". The word "saisir" is an Anglicism and should be avoided. Additionally, the word "et" should only be used once before "les matériels de communication".'
+}  
+ 
+ 
+*6* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'Subject-verb agreement',
+  'Explanation': "The correct form of the verb 'voyager' in the third person singular is 'voyageait' (not 'voyageais'). This is because the subject 'Il' is singular. Additionally, the preposition 'de' should be used instead of 'de les' to indicate 'from the' (des îles Galápagos). In the second part of the sentence, 'mangeais' should be changed to 'mangeait' to match the singular subject 'l'équipage'. Also, 'un pizza' should be corrected to 'une pizza' since 'pizza' is a feminine noun." 
+}  
+ 
+ 
+*7* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'Combinaison des articles',
+  'Explanation': "The combination 'de les' should be replaced with 'des' to indicate 'from the'. Additionally, 'un pizza' should be corrected to 'une pizza' to match the feminine noun 'pizza'. Finally, 'mangeais' should be changed to 'mangeait' to agree with the subject 'l'équipage' (singular, third person)."
+}  
+ 
+ 
+*8* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'à Polynésie -> à la Polynésie française (to French Polynesia)',
+  'Explanation': "In French, when referring to a country or region, we use the definite article 'la' or 'le' before the name. Therefore, it should be 'à la Polynésie française' instead of 'à Polynésie'. Additionally, 'mangeais' should be corrected to 'mangeait' to match the subject 'l'équipage' (the crew) which is singular. Lastly, 'un pizza' should be corrected to 'une pizza' to match the feminine noun 'pizza'."
+}  
+ 
+ 
+*9* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'Preposition error',
+  'Explanation': "The preposition 'de' should be used instead of 'de les' to indicate 'from the'. Additionally, 'Polynésie française' should be preceded by the definite article 'la'. In the second part of the sentence, 'mangeais' should be changed to 'mangeait' to agree with the subject 'l'équipage'. Lastly, 'un pizza' should be corrected to 'une pizza' to match the gender of the noun."
+}  
+ 
+ 
+*10* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé, pendant ce temps l'équipage mangeait une pizza.",
+  'Label': 'Agreement error',
+  'Explanation': "The verb 'mangeais' should agree with the subject 'l'équipage', which is singular. Therefore, it should be 'mangeait'. Additionally, 'un pizza' should be 'une pizza' to match the feminine noun 'pizza'."
+}  
+ 
+ 
+*11* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': "Object of the sentence",
+  'Explanation': "The verb 'a frappé' is intransitive and does not take a direct object. Therefore, it cannot be the object of the sentence. To correct the sentence, we remove 'pendant ce temps' and 'l'équipage mangeait un pizza' as they are not related to the main action of the sentence. Additionally, we correct the verb forms to match the subject: 'voyageait' instead of 'voyageais' and 'mangeait' instead of 'mangeais'. Finally, we add the article 'une' before 'pizza' to match the feminine noun." 
+}  
+ 
+ 
+*12* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Il voyageait des îles Galápagos à la Polynésie française quand le bateau a frappé. Pendant ce temps, l'équipage mangeait une pizza.",
+  'Label': 'Subject-verb agreement',
+  'Explanation': "The verb 'voyageais' should be changed to 'voyageait' to agree with the subject 'Il'. The preposition 'de' should be changed to 'des' to indicate 'from the Galápagos Islands'. The article 'les' before 'îles' should be removed. The preposition 'à' should be added before 'la Polynésie française' to indicate 'to French Polynesia'. The sentence should be divided into two sentences to improve clarity. The verb 'mangeais' should be changed to 'mangeait' to agree with the subject 'l'équipage'. The article 'un' before 'pizza' should be changed to 'une' to agree with the feminine noun 'pizza'."
+}  
+ 
+ 
+*13* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "La baleine frappée par un bateau. Un désastre de Mark Smolinski. Dans l'océan Pacifique, le voilier de Rick Rodriguez est entré en collision avec une baleine.",
+  'Label': 'preposition error',
+  'Explanation': "The correct preposition to use after 'entrer' is 'en'. Therefore, the correct phrase is 'entré en collision' which means 'entered into a collision' in English."
+}  
+ 
+ 
+*14* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.',
+  'Label': 'Preposition error',
+  'Explanation': 'The correct preposition to use in this context is "à" instead of "de". Also, "au" should be used before "sud-est" to indicate direction.'
+}  
+ 
+ 
+*15* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.',
+  'Label': 'preposition',
+  'Explanation': 'The preposition "à" is used to indicate distance in French. It should be used before the measurement "3000 kilomètres". Additionally, "au" should be used to indicate direction, so it should be "au sud-est".'
+}  
+ 
+ 
+*16* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.",
+  'Label': 'Preposition usage',
+  'Explanation': "In French, when indicating a direction or location, the preposition 'au' is used instead of 'de'. Therefore, the correct sentence should be 'Le bateau a coulé à 3000 kilomètres au sud-est de Tahiti.'"
+}  
+ 
+ 
+*17* 
+ {
+  "Type": "grammar",
+  "Corrected Sentence": "Le fabricant de ces appareils a dit que les appareils sont très populaires avec la communauté de marins.",
+  "Label": "Agreement error",
+  "Explanation": "The word 'communauté' is feminine, so it should be 'la communauté' instead of 'le communauté'. Also, 'populaire' should agree in gender and number with 'appareils', so it should be 'populaires'."
+}  
+ 
+ 
+*18* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Le fabricant de ces appareils a dit que les appareils sont très populaires avec la communauté de marins.',
+  'Label': 'agreement error',
+  'Explanation': 'The adjective "populaire" should agree in gender and number with the noun it modifies. Since "appareils" is plural, "populaire" should also be plural, which is "populaires". Additionally, the correct spelling of "communité" is "communauté".'
+}  
+ 
+ 
+*19* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Les appareils comme ça existaient pour les marins récréatifs depuis dix ans.",
+  'Label': 'verb form',
+  'Explanation': "The verb form 'était exister' is incorrect. The correct form is 'existaient' which agrees with the plural subject 'les appareils'. Additionally, the preposition 'pour' should be followed by the duration of time, so 'pour dix ans' is correct. Finally, 'depuis' is used to indicate a duration of time in French."
+}  
+ 
+ 
+*20* 
+ {
+  "Type": "grammar",
+  "Corrected Sentence": "Les autres marins dans la zone ont réussi dans l’effort de recherches parce qu’ils avaient Internet par satellite.",
+  "Label": "Verb tense error",
+  "Explanation": "The verb 'avaient eu' is in the passé composé tense, which is not necessary in this context. The correct form is 'ont réussi', which is in the passé simple tense to indicate a completed action in the past."
+}  
+ 
+ 
+*21* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les autres marins dans la zone avaient réussi dans l’effort de recherches parce qu’ils avaient eu Internet par satellite.',
+  'Label': 'anglicisme',
+  'Explanation': 'The phrase "étaient réussis" is a direct translation from English ("were successful"). In French, we use the verb "réussir" without the auxiliary verb "être". Therefore, the correct form is "avaient réussi" which means "had succeeded".'
+}  
+ 
+ 
+*22* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': 'Les signaux de détresse ne comptent plus sur les agences gouvernementales seules.',
+  'Label': 'seule - seule(s) - only, alone',
+  'Explanation': 'The word "seule" should agree in gender and number with the noun it modifies. In this case, "agences gouvernementales" is feminine and plural, so the correct form is "seules". Additionally, "agences gouvernementales" should be used instead of "agences gouvernement" to match the plural form of "seules".'
+}  
+ 
+ 
+*23* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les technologies des gouvernements sont vieilles.',
+  'Label': 'agreement',
+  'Explanation': 'In French, adjectives must agree in gender and number with the noun they modify. Since "technologies" and "gouvernements" are plural, the adjective "vieux" should also be plural, which is "vieilles" in this case.'
+}  
+ 
+ 
+*24* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Mais c'était essentiel que Rodriguez ait l'appareil satellite alimenté par batterie pour appeler son frère.",
+  'Label': 'essential - essentiel (essential)',
+  'Explanation': "The word 'essential' should be translated as 'essentiel' in French. The correct sentence should be: 'Mais c'était essentiel que Rodriguez ait l'appareil satellite alimenté par batterie pour appeler son frère.'"
+}  
+ 
+ 
+*25* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Mais c’était essentiel que Rodriguez ait l’appareil satellite alimenté par batterie pour appeler son frère.",
+  'Label': 'essentiel, ait, alimenté',
+  'Explanation': "The correct form of 'essential' in French is 'essentiel' and not 'essential'. The correct conjugation of the verb 'avoir' in the present subjunctive is 'ait' and not 'eût'. The correct form of 'alimenté' in this context is 'alimenté' and not 'alimenté'."
+}  
+ 
+ 
+*26* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Mais c'était essentiel que Rodriguez ait l'appareil satellite alimenté par batterie pour appeler son frère.",
+  'Label': 'Use of the subjunctive mood',
+  'Explanation': "The verb 'avoir' in this context should be conjugated in the present subjunctive form 'ait' instead of the past subjunctive form 'eût'. This is because the sentence expresses a subjective opinion or necessity, which requires the use of the subjunctive mood."
+}  
+ 
+ 
+*27* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': 'Rodriguez a dit que c’était comme frapper un mur.',
+  'Label': 'frapper -> frapper',
+  'Explanation': 'The word "frapper" is correct in this context and does not need to be changed.'
+}  
+ 
+ 
+*28* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Rodriguez a dit que c’était comme frapper un mur.',
+  'Label': 'article',
+  'Explanation': 'No correction needed. The sentence is correct as it is.'
+}  
+ 
+ 
+*29* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Rodriguez a écrit sur son iPhone quand il a dit "La technologie nous a sauvés."',
+  'Label': 'Passive voice used incorrectly',
+  'Explanation': 'The correct form of the verb "sauver" in this context is "a sauvé" because "La technologie" is the subject of the sentence. Additionally, "nous" should be placed before the verb "a sauvé" to indicate that "we" were saved. Finally, the word "dans" should be replaced with "sur" to indicate that the writing was done on the iPhone.'
+}  
+ 
+ 
+*30* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Son frère était des milliers de kilomètres loin, mais il a commencé les recherches pour retrouver Rodrigues.",
+  'Label': 'milliers de (des milliers de kilomètres)',
+  'Explanation': "The correct form of the phrase 'milliers de' is 'des milliers de'. In this case, it is used to indicate a large number of kilometers. Additionally, the word 'kilomètre' should be pluralized to 'kilomètres' to match the plural form of 'milliers'."
+}  
+ 
+ 
+*31* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': 'Tout l’équipage était sauvé.',
+  'Label': 'équipage',
+  'Explanation': 'The word "équipage" is misspelled. The correct spelling is "équipage". It means "crew" in English.'
+}  
+ 
+ 
+*32* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Un ami de Rodrigues qui s'appelle Tommy Joyce a dit que tous les marins veulent aider, mais ça rend beaucoup plus facile de coordonner et d'aider les plaisanciers en détresse.",
+  'Label': 'Missing conjunction',
+  'Explanation': "The word 'que' is missing before 'tous' to introduce the subordinate clause. It should be 'que tous les marins veulent aider' to indicate the speaker's statement."
+}  
+ 
+ 
+*33* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Le service de Starlink donne aux marins les signaux satellites qui atteignent les mers et les océans mondiaux.',
+  'Label': 'Agreement of nouns and adjectives',
+  'Explanation': 'In French, adjectives must agree in gender and number with the nouns they modify. In this case, the adjective "mondiale" should agree with the plural noun "océans". Therefore, it should be written as "mondiaux". Additionally, the preposition "avec" should be replaced with "aux" to indicate that the sailors are receiving the signals. Finally, the plural form "signaux satellites" is used to indicate multiple satellite signals.'
+}  
+ 
+ 
+*34* 
+ {
+  "Type": "grammar",
+  "Corrected Sentence": "Les gens qui ont aidé Rodriguez ont discuté comment les nouvelles technologies satellites, comme les systèmes Internet Starlink, ont amélioré la communication d'urgence pour les marins bloqués en mer et les personnes qui essaient de les trouver.",
+  "Label": "Conjugation error",
+  "Explanation": "The verb 'aider' should be conjugated in the past tense to agree with the subject 'les gens'. Additionally, the word 'nouvelles' should be used to agree with the plural noun 'technologies'. The word 'satellite' should be in the plural form 'satellites'. The phrase 'Starlink Internet Systèmes' should be translated as 'les systèmes Internet Starlink'. The verb 'avoir' should be used to indicate past tense. The pronoun 'ils' is unnecessary and can be omitted."
+}  
+ 
+ 
+*35* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les gens qui ont aidé Rodriguez ont discuté comment les nouvelles technologies par satellite, comme les systèmes Internet Starlink, ont amélioré la communication d’urgence pour les marins bloqués en mer et les personnes qui essaient de les retrouver.',
+  'Label': 'angl + accord',
+  'Explanation': 'In French, the verb "aider" (to help) needs to be conjugated to agree with the subject "les gens" (the people). Therefore, it should be "ont aidé" (have helped) instead of "aider". Additionally, the word "nouvelle" (new) should be in plural form "nouvelles" to agree with the plural noun "technologies". Lastly, the phrase "Starlink Internet Systèmes" should be translated as "les systèmes Internet Starlink" in French.'
+}  
+ 
+ 
+*36* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les gens qui ont aidé Rodriguez ont discuté comment les nouvelles technologies satellites, comme les systèmes Internet Starlink, ont amélioré la communication d’urgence pour les marins bloqués en mer et les personnes qui essaient de les trouver.',
+  'Label': 'Word order',
+  'Explanation': 'In French, the pronoun "ils" should come before the verb "trouver". Therefore, the correct word order is "de les trouver". Additionally, the verb "aider" should be in the past participle form "aidé" to agree with the plural subject "les gens qui". Finally, the noun "nouvelles technologies" should be plural to match the plural verb "ont amélioré".'
+}  
+ 
+ 
+*37* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': 'Les gens qui ont aidé Rodriguez ont discuté comment les nouvelles technologies satellites, comme Starlink Internet Systèmes, ont amélioré la communication d’urgence pour les marins bloqués en mer et les personnes qui essaient de les trouver.',
+  'Label': 'Conjugation error',
+  'Explanation': 'The verb "améliorer" should be conjugated in the past tense to agree with the subject "les nouvelles technologies satellites". Additionally, "aider" should be conjugated in the past tense as well.'
+}  
+ 
+ 
+*38* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "Mais pourquoi la baleine s'est percutée avec le bateau ?",
+  'Label': 'auxiliary verb',
+  'Explanation': "The auxiliary verb 's'est' is used correctly in the sentence to indicate the reflexive action of the whale hitting the boat. However, it should agree with the subject 'la baleine' in gender and number. Therefore, 's'est' should be used instead of 's’est'."
+}  
+ 
+ 
