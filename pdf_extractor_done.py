@@ -81,21 +81,16 @@ def base_extractor(path, texte) :
     # associerà la phrase        
     texte = nltk.sent_tokenize(texte)
     high_2_sent = {}
-    nsent = 0
-    sorted_dic = {}
+    
     for high in dic.keys() :
         for sentence in texte : 
             if high in sentence : 
-                high_2_sent[high] = sentence 
-                sorted_dic[high] = nsent
-
-        nsent += 1
+                high_2_sent[high] = sentence            
     high_2_sent = sort_dict_by_values(high_2_sent)
-    sorted_dic = sort_dict_by_values(sorted_dic)
     
     chunks = []
     c = 0 
-    for k in sorted_dic.keys() :
+    for k in dic.keys() :
         com = comment(c)
         com.highlight = k 
         com.annot = dic[k]
