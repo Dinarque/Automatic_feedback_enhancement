@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Mon Apr  3 05:05:31 2023
 
@@ -112,18 +111,3 @@ def base_extractor(path, texte) :
 def sort_dict_by_values(input_dict):
     sorted_dict = dict(sorted(input_dict.items(), key=lambda item: item[1]))
     return sorted_dict
-
-
-    
-def common(list1, list2) :
-    
-    for element in list1:
-        if element in list2:
-            print(element)
-            
-def uncommon(list1, list2) :
-    
-    for element in list1:
-        if element not in list2:
-            print(element)            
-    
