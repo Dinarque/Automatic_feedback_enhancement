@@ -219,7 +219,7 @@ else :
         st.subheader("Take a picture")
         camera_photo = st.camera_input(".")
         
-        
+        st.subheader ("analyse chunks")
         for chunk in st.session_state.chunks : 
             st.write(chunk)
         
