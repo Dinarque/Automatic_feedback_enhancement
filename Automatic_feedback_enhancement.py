@@ -280,7 +280,7 @@ else :
         
         text = ""
         
-        for sent in text :
+        for sent in texte :
             for i in range(len(sentences)): 
                 if sentences[i] == sent : sent = colour_html(sent, segments[i])
             text += sent
