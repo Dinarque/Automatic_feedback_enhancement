@@ -35,6 +35,9 @@ from stqdm import stqdm
 
 ## setting the streamlit session state
 
+if "price" not in st.session_state : 
+    st.session_state.price = 0 
+
 if "mission" not in st.session_state:
     st.session_state.mission = False
     
