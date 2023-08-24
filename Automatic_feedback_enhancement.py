@@ -70,7 +70,7 @@ def launch_extraction() :
     with open("buffer.pdf", "wb") as f:
         f.write(st.session_state.file.getbuffer())
     st.session_state.str_file = pdf_read(st.session_state.file)
-    st.session_state.chunks= base_extractor("buffer.pdf")
+    st.session_state.chunks= base_extractor("buffer.pdf", st.session_state.str_file)
     st.session_state.nb_chunks = len(st.session_state.chunks)
     
 
