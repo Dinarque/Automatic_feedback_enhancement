@@ -78,13 +78,12 @@ def base_extractor(path, texte) :
            dic[highlight] = content
     
            
-    """
-    # associerà la phrase        
+    
     texte = nltk.sent_tokenize(texte)
     st.session_state.highlights = list(dic.keys())
     st.session_state.texte = texte
     
-   
+    """
     
   
     c = 0 
