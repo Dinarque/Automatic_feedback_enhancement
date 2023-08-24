@@ -119,7 +119,7 @@ def base_extractor(path, texte) :
     chunks = []
     for h in st.session_state.highlight :
         com = comment(c)
-        candidats =  [ el for el in  com if el >= sent_considered ]
+        candidats =  [ el for el in  high_2_sent[h] if el >= sent_considered ]
         
         senten =sents [min[ candidats]]
         sent_considered = min[ candidats]
