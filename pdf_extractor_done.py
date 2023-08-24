@@ -119,6 +119,6 @@ def find_sentences_with_string(sent, text):
     text = text.replace("!", "")
     for s in sent  : 
         if str(text) in str(sent) : return s
-        else : st.session_state.depression. append [text, sent]
+        else : st.session_state.depression. append ([text, sent])
     return "Oupsie"
 
