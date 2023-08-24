@@ -50,6 +50,9 @@ def get_composition(pdf_file, bavard = False) :
 
 def base_extractor(path, texte) : 
     
+     
+
+    
     
     dic = {}
 
@@ -58,25 +61,21 @@ def base_extractor(path, texte) :
     # trouver texte annoté et contenu de l'annotation 
     for page_n in range(pdf_document.page_count):
         page = pdf_document.load_page(page_n)
+        all_words = page.get_text("words")
         page_annotations = page.annots()
 
         # Get all words on the current page
-        words = page.get_text("words")
+      
 
         # Iterate through annotations on the current page
         for annot in page_annotations:
-            
-            rect = annot.rect
-            words_under_annot = [word for word in words if fitz.Rect(word[:4]).intersects(rect)]
-            highlight = " ".join(word[4] for word in words_under_annot)
-
-            # Extract the content of other annotations if available
-           
-            content = annot.info.get("content", "")
-
-          
-
-            dic[highlight] = content
+           all_coordinates = annot.vertices
+           if len(all_coordinates) == 4:
+               highlight_coord = fitz.Quad(all_coordinates).rect
+           sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(highlight_coord)]
+           highlight = (" ".join(sentence))
+           content = annot.info.get("content", "")
+           dic[highlight] = content
             
     # associerà la phrase        
     texte = nltk.sent_tokenize(texte)
