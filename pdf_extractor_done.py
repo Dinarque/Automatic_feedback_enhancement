@@ -127,5 +127,5 @@ def find_sentences_with_string(text, target_string):
             if i < len(sentences) - 1:
                 found_sentences.append(sentences[i + 1].strip())
 
-    return found_sentences.join()[0]
+    return found_sentences[0]
 
