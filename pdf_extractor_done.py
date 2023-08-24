@@ -94,8 +94,9 @@ def base_extractor(path, texte) :
         high_2_sent[h] = "Oupsie"
         for el in matrix[h] : 
             if el == True :
-                high_2_sent[h] = el
-        
+                high_2_sent[h] = sents[matrix[h].index(el)]
+                
+    ## idée ; faire sur nombre d annot avec texte fouillé décroissant. pour ce faire matrice stocke liste de True, et on prend le premier 
     
     
     """
