@@ -106,10 +106,7 @@ def base_extractor(path, texte) :
         else : com.sentence = ""
         chunks.append(com)
         c += 1
-    
-    st.session_state.high_2_sent = high_2_sent 
-    st.session_state.high_to_annot = dic
-    st.session_state.sorted = sorted_dic
+   
     return chunks
  
 def sort_dict_by_values(input_dict):

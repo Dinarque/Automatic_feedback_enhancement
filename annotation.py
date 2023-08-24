@@ -13,8 +13,6 @@ class comment() :
         self.highlight = ""
         self.annot = ""
         self.sentence = ""
-        self.type = None 
-        
         
     def set_highlight(self, x) :
        self.highlight = x 
@@ -30,31 +28,3 @@ class comment() :
         string = f" sentence : {self.sentence}   highlight : {self.highlight}       annot : {self.annot} "
         return string
     
-    
-    
-    
-    
-""" l'élément clé du programme est de classer les annotations du professeur selon différentes catégories pour proposer le travail
-le plus utile.
-Il faut faire une typologie des types d'erreur et de ce qu'on attend pour pouvoir les corriger.
-
-* Les erreurs de grammaire : On veut un point de leçon ainsi que des exercices d'application.
-
-* Les erreurs de vocabualire. on veut une explication du terme employé en fr, en anglais , et de pourquoi ça ne marchait pas en contexte.
-
-* Les erreurs de syntaxe : on  veut guider l'étudiant dans la reformulation d'une phrase.
-
-* clarification requests.
-
-NB : Il faudra éviter les redondances. 
-
-
-
-Idée du programme : créer 4 sous classes de comments ou un marqueur, et il y aura 4 verions de la méthode "querry" qui communiquera avec chat GPT
-
-
-
-
-
-
-"""
