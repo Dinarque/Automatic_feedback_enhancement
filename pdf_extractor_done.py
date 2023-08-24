@@ -80,8 +80,14 @@ def base_extractor(path, texte) :
            
     
     sents = nltk.sent_tokenize(texte)
-    st.session_state.highlights = list(dic.keys())
+    st.session_state.highlight = list(dic.keys())
     st.session_state.texte = sents
+    matrix  = {}
+    for h in st.session_state.highlight :
+        matrix[h] = []
+        for sent in sents : 
+            matrix[h].append (h in sent)
+    st.session_state.matrix= matrix 
     
     """
     
