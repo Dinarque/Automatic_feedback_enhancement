@@ -112,12 +112,13 @@ def sort_dict_by_values(input_dict):
 
 
 def find_sentences_with_string(sent, text):
-  
+    st.subheader (f"lookin for {text}")
     st.session_state.depression = []
     text = text.replace(".", "")
     text = text.replace("?", "")
     text = text.replace("!", "")
     for s in sent  : 
+        st.write(f"in{s}")
         if str(text) in str(sent) : return s
         else : st.session_state.depression. append ([text, sent])
     return "Oupsie"
