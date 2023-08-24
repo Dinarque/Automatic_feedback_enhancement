@@ -76,7 +76,9 @@ def base_extractor(path, texte) :
            highlight = (" ".join(sentence))
            content = annot.info.get("content", "")
            dic[highlight] = content
-            
+    
+           
+    """
     # associerà la phrase        
     texte = nltk.sent_tokenize(texte)
     st.session_state.highlights = list(dic.keys())
@@ -84,7 +86,7 @@ def base_extractor(path, texte) :
     
    
     
-    chunks = []
+  
     c = 0 
     for sent in texte :
         for high in st.session_state.highlights :
@@ -94,10 +96,37 @@ def base_extractor(path, texte) :
                 com.highlight = high
                 com.annot = dic[high]
     
-    
-   
+    """
+    c = 0
+    chunks = []
+    for h in st.session_state.highlights :
+        com = comment(c)
+        com.sentence = find_sentences_with_string(texte, h)
+        com.highlight = h
+        com.annot = dic[h]
+        c+=1
     return chunks
  
 def sort_dict_by_values(input_dict):
     sorted_dict = dict(sorted(input_dict.items(), key=lambda item: item[1]))
     return sorted_dict
+
+import re 
+
+def find_sentences_with_string(text, target_string):
+    sentences = re.split(r'(?<=[.!?]) +', text)  # Split the text into sentences
+    found_sentences = []
+
+    for i, sentence in enumerate(sentences):
+        if target_string in sentence:
+            found_sentences.append(sentence.strip())
+
+            # Check previous sentence if exists and add it as well
+            if i > 0:
+                found_sentences.append(sentences[i - 1].strip())
+            # Check next sentence if exists and add it as well
+            if i < len(sentences) - 1:
+                found_sentences.append(sentences[i + 1].strip())
+
+    return found_sentences.join()
+
