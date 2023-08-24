@@ -13,11 +13,11 @@ def markdown_underline(sentence, segment, colour = "yellow" ) :
         """
         mkd = f"{store[0]}**:{colour}[{segment}]**{store[1]}"
         """
-        mkd = f"{store[0]}**:{colour}[{segment}]**{store[1]}"
+        mkd = f'{store[0]}**<span style="color:{colour};">{segment}</span>**{store[1]}'
         store.append("")
         return mkd
 
-    else : return "oupsie"
+    else : return sentence
     
 
 
