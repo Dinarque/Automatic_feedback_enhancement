@@ -55,7 +55,7 @@ def base_extractor(path, texte) :
     
     
     dic = {}
-
+    date = {}
     pdf_document = fitz.open(path)
 
     # trouver texte annoté et contenu de l'annotation 
@@ -76,11 +76,11 @@ def base_extractor(path, texte) :
            highlight = (" ".join(sentence))
            content = annot.info.get("content", "")
            dic[highlight] = content
-    
-           
+           date[highlight] = annot.info["creationDate"]
+    date = sort_dict_by_values(date)
     
     sents = nltk.sent_tokenize(texte)
-    st.session_state.highlight = list(dic.keys())
+    st.session_state.highlight = list(date.keys())
     st.session_state.texte = sents
     matrix  = {}
     for h in st.session_state.highlight :
@@ -110,6 +110,7 @@ def base_extractor(path, texte) :
         com.highlight = h
         com.annot = dic[h]
         c+=1
+        chunks.append(com)
     return chunks
  
 def sort_dict_by_values(input_dict):
@@ -118,13 +119,13 @@ def sort_dict_by_values(input_dict):
 
 
 def find_sentences_with_string(sent, text):
-    st.subheader (f"lookin for {text}")
+    
     st.session_state.depression = []
     text = text.replace(".", "")
     text = text.replace("?", "")
     text = text.replace("!", "")
     for s in sent  : 
-        st.write(f"in{s}")
+        
         if str(text) in str(sent) : return s
         else : st.session_state.depression. append ([text, sent])
     
