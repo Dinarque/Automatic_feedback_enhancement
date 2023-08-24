@@ -9,7 +9,7 @@ Created on Tue Aug  1 14:12:42 2023
 ## code hyperparameters
 
 Link_2_GPT = True
-dvlper_mode = True
+dvlper_mode = False
 colored = True
 
 button= False
@@ -133,7 +133,7 @@ with st.sidebar :
             if  lb.button(label="launch feedback") :
                 cleanse(st.session_state)
                 lb.download_button( "copycat", data=file, file_name='copycat.pdf')
-                #display_menu(True)
+                display_menu(True)
                 st.subheader ("we re clean")
                 h = launch_extraction()
                 path = create_log(file.name)
