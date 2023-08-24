@@ -120,9 +120,10 @@ def base_extractor(path, texte) :
     for h in st.session_state.highlight :
         com = comment(c)
         candidats =  [ el for el in  high_2_sent[h] if el >= sent_considered ]
-        
-        senten =sents [min( candidats)]
-        sent_considered = min( candidats)
+        if len(candidats) != 0 :
+            senten =sents [min( candidats)]
+            sent_considered = min( candidats)
+        else : senten = "oopsie"
         com.sentence = senten
         st.session_state.sentence.append(senten)
         com.highlight = h
