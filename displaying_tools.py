@@ -15,7 +15,10 @@ def markdown_underline(sentence, segment, colour = "yellow" ) :
         """
         mkd = f"{store[0]}**:{colour}[{segment}]**{store[1]}"
         store.append("")
-    return mkd
+        return mkd
+
+    else : return "oupsie"
+    
 
 
 
