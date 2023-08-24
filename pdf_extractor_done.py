@@ -79,9 +79,9 @@ def base_extractor(path, texte) :
     
            
     
-    texte = nltk.sent_tokenize(texte)
+    sents = nltk.sent_tokenize(texte)
     st.session_state.highlights = list(dic.keys())
-    st.session_state.texte = texte
+    st.session_state.texte = sents
     
     """
     
