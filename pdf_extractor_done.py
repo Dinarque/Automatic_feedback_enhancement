@@ -72,7 +72,8 @@ def base_extractor(path, texte) :
            all_coordinates = annot.vertices
            if len(all_coordinates) == 4:
                highlight_coord = fitz.Quad(all_coordinates).rect
-           sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(highlight_coord)]
+               sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(highlight_coord)]
+           else : sentence = ""
            highlight = (" ".join(sentence))
            highlight = highlight.rsplit(".")[0]
            content = annot.info.get("content", "")
