@@ -87,15 +87,18 @@ def base_extractor(path, texte) :
     for h in st.session_state.highlight :
         matrix[h] = []
         for sent in sents : 
-            matrix[h].append (h in sent)
+            if  h in sent : matrix [h].append(sent) 
+            
+            else :  matrix[h].append (h in sent)
     #st.session_state.matrix= matrix 
     
     high_2_sent = {}
     for h in matrix.keys() :
         high_2_sent[h] = []
         for el in matrix[h] : 
-            if el == True :
-                high_2_sent[h] .append(matrix[h].index(el))
+            if el != False :
+                high_2_sent[h].append(el)
+                
     st.session_state.high_2_sent = high_2_sent
     ## idée ; faire sur nombre d annot avec texte fouillé décroissant. pour ce faire matrice stocke liste de True, et on prend le premier 
     
@@ -115,14 +118,17 @@ def base_extractor(path, texte) :
     """
     st.session_state.sentence=[]
     c = 0
-    sent_considered = 0
+    
+    sent_considered = sents[0]
+    idx = sents.index( sent_considered )
     chunks = []
     for h in st.session_state.highlight :
         com = comment(c)
-        candidats =  [ el for el in  high_2_sent[h] if el >= sent_considered ]
+        candidats =  [ el for el in  high_2_sent[h] if sents.index( el) >= idx ]
         if len(candidats) != 0 :
-            senten =sents [min( candidats)]
-            sent_considered = min( candidats)
+            senten = candidats[0]
+            sent_considered = senten 
+            idx = sents.index( sent_considered )
         else : senten = "oopsie"
         com.sentence = senten
         st.session_state.sentence.append(senten)
