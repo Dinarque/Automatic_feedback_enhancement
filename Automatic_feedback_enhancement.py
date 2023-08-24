@@ -220,6 +220,9 @@ else :
         camera_photo = st.camera_input(".")
         if camera_photo :
             st.image(camera_photo)
+        
+        for chunk in st.session_state.chunks : 
+            print(chunk)
        
         if st.button("Come back to the menu silly ?") : 
             display_menu(True)
@@ -481,7 +484,10 @@ else :
                             
                         exo, cb = create_exo(dic, st.session_state.summary)
                         update_cost(st.session_state, cb)
-                        dic["Exo"] = eval(exo)
+                        try : dic["Exo"] = eval(exo)
+                        except : 
+                            exo, cb = create_exo(dic, st.session_state.summary)
+                            update_cost(st.session_state, cb)
                         st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
                         update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
                         st.experimental_rerun()

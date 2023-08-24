@@ -26,27 +26,10 @@ class comment() :
        self.sentence = x 
    
     def __str__(self ,rank = False):
-        if rank : string =  f"annotation {self.rank} {self.highlight} could be improved  :  {self.annot}  )"
-        else : string =  f"In the sentence ' {self.sentence}', the chunk ' {self.highlight} ' could be improved  :  {self.annot}  )"
-        if self.type != None : string += "\n the teacher commented on the " +self.type
+        
+        string = f" sentence : {self.sentence}   highlight : {self.highlight}       annot : {self.annot} "
         return string
     
-    
-    def classify_comment(self, bavard = True) :
-        
-        prompt = 'A student wrote the following sentence "' + self.sentence 
-        prompt += ' ".Highlighting the segment "' + self.highlight
-        prompt += ' "he wrote the following comment "' + self.annot
-        prompt += ' ". Did he commented on grammar or vocabulary ? Answer shortly'
-        conv = conversation(prompt)
-        answ = conv.interrogate()
-        if bavard : print(conv.history)
-        return answ
-        """
-        if "grammar" in answ : self.type = "Grammar"
-        elif "vocabulary"in answ : self.type = "Vocabulary"
-        else : self.type = "None written"
-        """
     
     
     
