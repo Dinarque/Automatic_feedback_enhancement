@@ -49,18 +49,14 @@ def get_composition(pdf_file, bavard = False) :
     
     
 
-def base_extractor(path) : 
+def base_extractor(path, texte) : 
     
     
-    
-
-        
-    
-    
-    chunks = {}
+    dic = {}
 
     pdf_document = fitz.open(path)
 
+    # trouver texte annoté et contenu de l'annotation 
     for page_n in range(pdf_document.page_count):
         page = pdf_document.load_page(page_n)
         page_annotations = page.annots()
@@ -81,9 +77,30 @@ def base_extractor(path) :
 
           
 
-            chunks[highlight] = content
-
-  
+            dic[highlight] = content
+            
+    # associerà la phrase        
+    texte = nltk.sent_tokenize(texte)
+    high_2_sent = {}
+    
+    for high in dic.keys() :
+        for sentence in texte : 
+            if high in sentence : 
+                high_2_sent[high] = sentence            
+    high_2_sent = sort_dict_by_values(high_2_sent)
+    
+    chunks = []
+    c = 0 
+    for k in dic.keys() :
+        com = comment(c)
+        com.highlight = k 
+        com.annot = dic[k]
+        
+        
+        if k in high_2_sent.keys() : com.sentence = high_2_sent[k]
+        else : com.sentence = ""
+        chunks.append(com)
+        c += 1
    
     return chunks
  

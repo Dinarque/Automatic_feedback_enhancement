@@ -19,7 +19,7 @@ button= False
 
 import streamlit as st
 import os
-from  pdf_extractor_done import get_composition, base_extractor
+from  pdf_extractor_done import get_composition, base_extractor 
 from dotenv import load_dotenv , find_dotenv 
 load_dotenv(find_dotenv(), override=True)
 from displaying_tools import just, l, centered_title, title, centered_button,  colour_html, add_alinea
