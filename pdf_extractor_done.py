@@ -80,6 +80,7 @@ def base_extractor(path, texte) :
             
     # associerà la phrase        
     texte = nltk.sent_tokenize(texte)
+    st.session_state.texte = texte
     high_2_sent = {}
     
     for high in dic.keys() :
@@ -88,6 +89,8 @@ def base_extractor(path, texte) :
                 high_2_sent[high] = sentence            
     high_2_sent = sort_dict_by_values(high_2_sent)
     
+    
+    # chunk reassembling
     chunks = []
     c = 0 
     for k in dic.keys() :
