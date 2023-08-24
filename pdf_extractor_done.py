@@ -104,7 +104,7 @@ def base_extractor(path, texte) :
     """
     c = 0
     chunks = []
-    for h in st.session_state.highlights :
+    for h in st.session_state.highlight :
         com = comment(c)
         com.sentence = find_sentences_with_string(st.session_state.texte, str(h))
         com.highlight = h
