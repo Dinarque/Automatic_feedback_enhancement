@@ -218,11 +218,16 @@ else :
     if st.session_state.mission == "pic" : 
         st.subheader("Take a picture")
         camera_photo = st.camera_input(".")
+        
+        
+        for chunk in st.session_state.chunks : 
+            st.write(chunk)
+        
+        
         if camera_photo :
             st.image(camera_photo)
         
-        for chunk in st.session_state.chunks : 
-            print(chunk)
+        
        
         if st.button("Come back to the menu silly ?") : 
             display_menu(True)
