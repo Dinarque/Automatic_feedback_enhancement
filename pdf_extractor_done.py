@@ -95,7 +95,7 @@ def base_extractor(path, texte) :
         for el in matrix[h] : 
             if el == True :
                 high_2_sent[h] = sents[matrix[h].index(el)]
-                
+    st.session_state.high_2_sent = high_2_sent
     ## idée ; faire sur nombre d annot avec texte fouillé décroissant. pour ce faire matrice stocke liste de True, et on prend le premier 
     
     
