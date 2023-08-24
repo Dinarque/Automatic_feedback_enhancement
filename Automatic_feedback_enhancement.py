@@ -9,7 +9,7 @@ Created on Tue Aug  1 14:12:42 2023
 ## code hyperparameters
 
 Link_2_GPT = True
-dvlper_mode = False
+dvlper_mode = True
 colored = True
 
 button= False
