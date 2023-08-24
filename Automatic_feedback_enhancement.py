@@ -18,6 +18,7 @@ button= False
 ## imports 
 
 import streamlit as st
+import nltk
 import os
 from  pdf_extractor_done import get_composition, base_extractor 
 from dotenv import load_dotenv , find_dotenv 
@@ -272,12 +273,17 @@ else :
         
         l ("Here is the original work : ", "center")
         "___"
+        texte = texte = nltk.sent_tokenize(st.session_state.str_file)
+    
         sentences = [com.sentence for com in st.session_state.chunks]
         segments = [com.highlight for com in st.session_state.chunks]
         
         text = ""
-        for i in range (len(sentences)) :
-            text += colour_html(sentences[i], segments[i])
+        
+        for sent in text :
+            for i in range(len(sentences)): 
+                if sentences[i] == sent : sent = colour_html(sent, segments[i])
+            text += sent
         
         l(add_alinea(text) )
         "___"
