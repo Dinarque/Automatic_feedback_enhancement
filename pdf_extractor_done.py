@@ -106,7 +106,7 @@ def base_extractor(path, texte) :
     chunks = []
     for h in st.session_state.highlights :
         com = comment(c)
-        com.sentence = find_sentences_with_string(sents, str(h))
+        com.sentence = find_sentences_with_string(st.session_state.texte, str(h))
         com.highlight = h
         com.annot = dic[h]
         c+=1
@@ -127,5 +127,8 @@ def find_sentences_with_string(sent, text):
         st.write(f"in{s}")
         if str(text) in str(sent) : return s
         else : st.session_state.depression. append ([text, sent])
+    
+    
+    
     return "Oupsie"
 
