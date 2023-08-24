@@ -89,6 +89,15 @@ def base_extractor(path, texte) :
             matrix[h].append (h in sent)
     st.session_state.matrix= matrix 
     
+    high_2_sent = {}
+    for h in matrix.keys() :
+        high_2_sent[h] = "Oupsie"
+        for el in matrix[h] : 
+            if el == True :
+                high_2_sent[h] = el
+        
+    
+    
     """
     
   
@@ -107,7 +116,7 @@ def base_extractor(path, texte) :
     chunks = []
     for h in st.session_state.highlight :
         com = comment(c)
-        senten = find_sentences_with_string(st.session_state.texte, h)
+        senten = high_2_sent[h]
         com.sentence = senten
         st.session_state.sentence.append(senten)
         com.highlight = h
@@ -137,4 +146,5 @@ def find_sentences_with_string(sent, text):
     
     
     return "Oupsie"
+
 
