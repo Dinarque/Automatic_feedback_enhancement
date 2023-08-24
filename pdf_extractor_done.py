@@ -70,15 +70,16 @@ def base_extractor(path, texte) :
         # Iterate through annotations on the current page
         for annot in page_annotations:
            all_coordinates = annot.vertices
-           if len(all_coordinates) == 4:
-               highlight_coord = fitz.Quad(all_coordinates).rect
+           try : 
+               if len(all_coordinates) == 4:
+                   highlight_coord = fitz.Quad(all_coordinates).rect
                sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(highlight_coord)]
-           else : sentence = ""
-           highlight = (" ".join(sentence))
-           highlight = highlight.rsplit(".")[0]
-           content = annot.info.get("content", "")
-           dic[highlight] = content
-           date[highlight] = annot.info["creationDate"]
+               highlight = (" ".join(sentence))
+               highlight = highlight.rsplit(".")[0]
+               content = annot.info.get("content", "")
+               dic[highlight] = content
+               date[highlight] = annot.info["creationDate"]
+           except : print("sorry Lindsay")
     date = sort_dict_by_values(date)
     
     sents = nltk.sent_tokenize(texte)
