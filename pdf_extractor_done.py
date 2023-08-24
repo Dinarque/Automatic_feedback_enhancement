@@ -100,7 +100,7 @@ def base_extractor(path, texte) :
     chunks = []
     for h in st.session_state.highlights :
         com = comment(c)
-        com.sentence = find_sentences_with_string(texte, str(h))
+        com.sentence = find_sentences_with_string(sents, str(h))
         com.highlight = h
         com.annot = dic[h]
         c+=1
@@ -110,25 +110,14 @@ def sort_dict_by_values(input_dict):
     sorted_dict = dict(sorted(input_dict.items(), key=lambda item: item[1]))
     return sorted_dict
 
-import re 
 
-def find_sentences_with_string(text, target_string):
-    sentences = re.split(r'(?<=[.!?]) +', text)  # Split the text into sentences
-    found_sentences = []
+def find_sentences_with_string(sent, text):
+  
     
     text = text.replace(".", "")
     text = text.replace("?", "")
     text = text.replace("!", "")
-    for i, sentence in enumerate(sentences):
-        if target_string in sentence:
-            found_sentences.append(sentence.strip())
-
-            # Check previous sentence if exists and add it as well
-            if i > 0:
-                found_sentences.append(sentences[i - 1].strip())
-            # Check next sentence if exists and add it as well
-            if i < len(sentences) - 1:
-                found_sentences.append(sentences[i + 1].strip())
-
-    return found_sentences[0]
+    for s in sent  : 
+        if text in sent : return s
+    return "Oupsie"
 
