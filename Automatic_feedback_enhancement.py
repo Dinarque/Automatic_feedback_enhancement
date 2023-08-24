@@ -294,7 +294,7 @@ else :
                 set_mission("cor")
                 st.experimental_rerun() 
         with right : 
-            if st.button("Come back to the menu") : 
+            if st.button("Back to the menu") : 
                 display_menu(True)
                 set_mission(False)
                 st.experimental_rerun() 
