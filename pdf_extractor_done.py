@@ -121,13 +121,15 @@ def sort_dict_by_values(input_dict):
 def find_sentences_with_string(sent, text):
     
     st.session_state.depression = []
-    text = text.replace(".", "")
-    text = text.replace("?", "")
-    text = text.replace("!", "")
+    texte = text.replace(".", "")
+    texte = texte.replace("?", "")
+    texte = texte.replace("!", "")
+    
     for s in sent  : 
         
-        if str(text) in str(sent) : return s
-        else : st.session_state.depression. append ([text, sent])
+        if str(texte) in str(sent) : 
+            return s
+     
     
     
     
