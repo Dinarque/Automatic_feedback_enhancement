@@ -100,7 +100,7 @@ def base_extractor(path, texte) :
     chunks = []
     for h in st.session_state.highlights :
         com = comment(c)
-        com.sentence = find_sentences_with_string(texte, h)
+        com.sentence = find_sentences_with_string(texte, str(h))
         com.highlight = h
         com.annot = dic[h]
         c+=1
