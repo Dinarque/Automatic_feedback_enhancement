@@ -115,7 +115,10 @@ import re
 def find_sentences_with_string(text, target_string):
     sentences = re.split(r'(?<=[.!?]) +', text)  # Split the text into sentences
     found_sentences = []
-
+    
+    text = text.replace(".", "")
+    text = text.replace("?", "")
+    text = text.replace("!", "")
     for i, sentence in enumerate(sentences):
         if target_string in sentence:
             found_sentences.append(sentence.strip())
