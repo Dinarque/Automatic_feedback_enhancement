@@ -74,6 +74,7 @@ def base_extractor(path, texte) :
                highlight_coord = fitz.Quad(all_coordinates).rect
            sentence = [w[4] for w in all_words if   fitz.Rect(w[0:4]).intersects(highlight_coord)]
            highlight = (" ".join(sentence))
+           highlight = highlight.replace(".", "")
            content = annot.info.get("content", "")
            dic[highlight] = content
            date[highlight] = annot.info["creationDate"]
@@ -81,20 +82,20 @@ def base_extractor(path, texte) :
     
     sents = nltk.sent_tokenize(texte)
     st.session_state.highlight = list(date.keys())
-    st.session_state.texte = sents
+    #st.session_state.texte = sents
     matrix  = {}
     for h in st.session_state.highlight :
         matrix[h] = []
         for sent in sents : 
             matrix[h].append (h in sent)
-    st.session_state.matrix= matrix 
+    #st.session_state.matrix= matrix 
     
     high_2_sent = {}
     for h in matrix.keys() :
-        high_2_sent[h] = "Oupsie"
+        high_2_sent[h] = []
         for el in matrix[h] : 
             if el == True :
-                high_2_sent[h] = sents[matrix[h].index(el)]
+                high_2_sent[h] .append(matrix[h].index(el))
     st.session_state.high_2_sent = high_2_sent
     ## idée ; faire sur nombre d annot avec texte fouillé décroissant. pour ce faire matrice stocke liste de True, et on prend le premier 
     
@@ -114,16 +115,20 @@ def base_extractor(path, texte) :
     """
     st.session_state.sentence=[]
     c = 0
+    sent_considered = 0
     chunks = []
     for h in st.session_state.highlight :
         com = comment(c)
-        senten = high_2_sent[h]
+        candidats =  [ el for el in  com if el >= sent_considered ]
+        
+        senten =sents [min[ candidats]]
+        sent_considered = min[ candidats]
         com.sentence = senten
         st.session_state.sentence.append(senten)
         com.highlight = h
         com.annot = dic[h]
         c+=1
-        chunks.append(com)
+        if com.annot != "" : chunks.append(com)
     return chunks
  
 def sort_dict_by_values(input_dict):
