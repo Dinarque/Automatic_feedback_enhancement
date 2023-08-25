@@ -25,9 +25,9 @@ def get_data(session_state) :
                      val = session_state.chunk_analysis[k].replace ("'s ", " s ")
                      val = val.replace ("l' ", "l ")
                      val = val.replace("l'", " l")
-                     session_state.chunk_analysis.pop(k)
-                     k = k.replace ("l' ", "l ")
-                     k =  k.replace ("'s ", " s ")
+                     #session_state.chunk_analysis.pop(k)
+                     #k = k.replace ("l' ", "l ")
+                     #k =  k.replace ("'s ", " s ")
                     
                      
                      session_state.chunk_analysis[k] = eval(session_state.chunk_analysis[k])
