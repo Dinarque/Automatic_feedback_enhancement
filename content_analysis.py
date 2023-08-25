@@ -20,11 +20,12 @@ def get_data(session_state) :
                  try : 
                      session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("'s ", " s ")
                      session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("l' ", " l ")
+                     session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace("l'", " l")
                      session_state.chunk_analysis[k] = eval(session_state.chunk_analysis[k])
                  except : 
                     answer, cb = correction_prompt(st.session_state.chunks[k])
                     update_cost(session_state, cb)
-                    session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
+                    session_state.chunk_analysis[k] = answer
                     st.experimental_rerun()
     ## analyse  
     idx = [int(k) for k in session_state.chunk_analysis ]
