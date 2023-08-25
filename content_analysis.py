@@ -18,9 +18,14 @@ def get_data(session_state) :
     for k in session_state.chunk_analysis.keys() : 
         if type (session_state.chunk_analysis[k]) is not dict :
                  try : 
-                     session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("'s ", " s ")
-                     session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("l' ", " l ")
-                     session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace("l'", " l")
+                     val = session_state.chunk_analysis[k].replace ("'s ", " s ")
+                     val = val.replace ("l' ", "l ")
+                     val = val.replace("l'", " l")
+                     session_state.chunk_analysis.pop(k)
+                     k = k.replace ("l' ", "l ")
+                     k =  k.replace ("'s ", " s ")
+                    
+                     
                      session_state.chunk_analysis[k] = eval(session_state.chunk_analysis[k])
                  except : 
                     answer, cb = correction_prompt(st.session_state.chunks[k])
