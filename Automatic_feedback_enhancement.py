@@ -281,7 +281,8 @@ else :
         l ("Here is the original work : ", "center")
         "___"
         texte = texte = nltk.sent_tokenize(st.session_state.str_file)
-    
+        st.session_state.texte = texte 
+        st.session_state.sentence  = [chunk.sentence for chunk in st.session_state.chunks]
         sentences = [com.sentence for com in st.session_state.chunks]
         segments = [com.highlight for com in st.session_state.chunks]
         
