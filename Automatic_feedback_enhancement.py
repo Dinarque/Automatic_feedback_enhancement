@@ -376,7 +376,7 @@ else :
                             
             if z3.button("Correct all") :
                    
-                    for i in range(len(st.session_state.chunks))  :
+                    for i in stqdm(range(len(st.session_state.chunks)))  :
                         st.write(f"chunk {i} corrected ")
                         
                         if i not in st.session_state.chunk_analysis.keys() : 
@@ -384,6 +384,8 @@ else :
                             update_cost(st.session_state, cb)
                             st.session_state.chunk_analysis[i] = answer
                             update_log(st.session_state.log_path, f'*{i}* \n {answer}  \n \n \n', )
+                        else  : st.write(f"chunk {i}  was already corrected ")
+                        
                     st.experimental_rerun() 
             
         else: 
