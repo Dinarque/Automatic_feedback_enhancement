@@ -11,16 +11,21 @@ from gpt_pipeline import label_analysis, update_cost, write_synthesis
 import os 
 from logs import create_folder
 from fpdf import FPDF
-from gpt_pipeline import wordreference_link
+from gpt_pipeline import wordreference_link, correction_prompt
 
 def get_data(session_state) :
     
     for k in session_state.chunk_analysis.keys() : 
         if type (session_state.chunk_analysis[k]) is not dict :
-                 session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("'s ", " s ")
-                 session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("l' ", " l ")
-                 session_state.chunk_analysis[k] = eval(session_state.chunk_analysis[k])
-    ## analyse 
+                 try : 
+                     session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("'s ", " s ")
+                     session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("l' ", " l ")
+                     session_state.chunk_analysis[k] = eval(session_state.chunk_analysis[k])
+                 except : 
+                    answer, cb = correction_prompt(st.session_state.chunks[k])
+                    update_cost(session_state, cb)
+                    session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
+    ## analyse  
     idx = [int(k) for k in session_state.chunk_analysis ]
     tp = [type (el) for el in idx ]
     tp2 =  tp = [type (el) for el in session_state.chunk_analysis.keys() ]
