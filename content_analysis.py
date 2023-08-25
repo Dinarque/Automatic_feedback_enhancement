@@ -25,6 +25,7 @@ def get_data(session_state) :
                     answer, cb = correction_prompt(st.session_state.chunks[k])
                     update_cost(session_state, cb)
                     session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
+                    st.experimental_rerun()
     ## analyse  
     idx = [int(k) for k in session_state.chunk_analysis ]
     tp = [type (el) for el in idx ]
