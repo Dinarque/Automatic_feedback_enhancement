@@ -571,3 +571,9 @@ else :
         l("This app aims at helping students review and correct their writing in a foreign language. You have to upload a corrected pdf file where the mistakes have been highlighted by an educator. The work will be divided into chunks and the application will call a Large Language Model to help provide a more detailed feedback. For each chunk, grammatical or vocabular explanation will be provided. You will be able to request further exercises. At the end of the session, all the information will be gathered in a synthetic pdf that will work as a revision tool.  Enjoy :100: !  ")
            
 if dvlper_mode : st.session_state
+
+
+
+for i in range(10) :
+    st.write("")
+st.write(" © Automatic Feedback Enhancement App created by Louis Jourdain")
