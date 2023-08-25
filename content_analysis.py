@@ -14,7 +14,7 @@ from fpdf import FPDF
 from gpt_pipeline import wordreference_link, correction_prompt
 
 def get_data(session_state) :
-    
+    st.write(session_state.price)
     for k in session_state.chunk_analysis.keys() : 
         if type (session_state.chunk_analysis[k]) is not dict :
                  try : 
