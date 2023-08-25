@@ -253,7 +253,7 @@ else :
         try : 
             fn =  f"Review_document_for_{st.session_state.file.name}.docx"
         except : 
-            fn = "Review_document.pdf"
+            fn = "Review_document.docx"
         bio = io.BytesIO()
         doc_download.save(bio)
         if doc_download:
