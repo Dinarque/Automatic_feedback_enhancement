@@ -250,14 +250,17 @@ else :
         
         import io
         doc_download = doc
-    
+        try : 
+            fn =  f"Review_document_for_{st.session_state.file.name}.docx"
+        except : 
+            fn = "Review_document"
         bio = io.BytesIO()
         doc_download.save(bio)
         if doc_download:
             st.download_button(
                 label="Download the file",
                 data=bio.getvalue(),
-                file_name=f"Review_document_for_{st.session_state.file.name}.docx",
+                file_name=fn,
                 mime="docx"
             )
         try:
@@ -473,7 +476,7 @@ else :
                 
                 if st.button(mes) :
                     
-                    extra, cb = create_extra(dic, chunk.sentence)
+                    extra, cb = create_extra(dic, chunk.sentence, st.session_state)
                     if dic["Type"] == "grammar" :
                         update_cost(st.session_state, cb)
                     dic["Extra"] = extra

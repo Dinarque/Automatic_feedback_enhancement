@@ -183,10 +183,10 @@ def wordreference_link(word, language):
     
     return link
 
-def create_extra(dic, sentence):
+def create_extra(dic, sentence, session_state):
     if dic["Type"] == "vocabulary" : return create_extra_voc(dic["Label"])
     else : 
-        return create_extra_gram(sentence, dic)
+        return create_extra_gram(sentence, dic, session_state)
 
 def sum_up(composition, language = "english") :
     
@@ -201,9 +201,9 @@ def sum_up(composition, language = "english") :
         output = chat(messages)
         return output.content, cb
 
-def create_extra_gram (sent, dic,language = "english") :
+def create_extra_gram (sent, dic, session_state) :
     
-    sm = f"Create a comprehensive French grammar lesson written in {language} suitable for a college student focusing on the specified topic. Utilize the provided student's sentence and its correct version within your lesson."
+    sm = f"Create a comprehensive {session_state.target} grammar lesson written in {session_state.language} suitable for a college student focusing on the specified topic. Utilize the provided student's sentence and its correct version within your lesson."
     hm =f" topic : *{dic['Label']}*  student's incorrect sentence : *{sent}*      corrected sentence : *{dic['Corrected Sentence']}* "
     
     chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
@@ -258,25 +258,7 @@ def create_extra_voc (dic) :
     
     
     
-    
-"""
-def create_extra_voc (dic) :
-    
-        from langdetect import detect 
-     
-        extra = "Click for more information on the words you used and expand yout vocabulary ! \n \n \n"
 
-        words = dic["Label"]
-        print(words)
-        for k in words.keys():
-            word = words[k]
-            print(word)
-            lang = detect(word)
-            link = wordreference_link(word, lang)
-            extra += f'{k} :  {word}  {link}'
-            
-        return extra, None 
-"""
         
 def streamlit_chat(dic, key) :
     
@@ -336,7 +318,7 @@ def label_analysis (labels) :
     
 def write_synthesis (label,  session_state) : 
     
-    sm = f"Write in {session_state.target} a very comprehensive {session_state.language} grammar lecture about the given topic, using as context the texgt of the student work given."
+    sm = f"Write in {session_state.language} a very comprehensive {session_state.target} grammar lecture about the given topic, using as context the texgt of the student work given."
     hm = f' topic : {label}, context : {session_state.str_file}'
     chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
     messages = [
