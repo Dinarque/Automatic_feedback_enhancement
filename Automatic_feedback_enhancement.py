@@ -9,7 +9,7 @@ Created on Tue Aug  1 14:12:42 2023
 ## code hyperparameters
 
 Link_2_GPT = True
-dvlper_mode = False
+dvlper_mode = True
 colored = True
 
 button= False
@@ -222,17 +222,13 @@ else :
         st.subheader("Take a picture")
         camera_photo = st.camera_input(".")
         
-        st.subheader ("analyse chunks")
-        for chunk in st.session_state.chunks : 
-            st.write(chunk)
-        
         
         if camera_photo :
             st.image(camera_photo)
         
         
        
-        if st.button("Come back to the menu silly ?") : 
+        if st.button("Come back to the menu, silly ?") : 
             display_menu(True)
             set_mission(False)
             st.experimental_rerun() 
