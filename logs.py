@@ -91,8 +91,17 @@ def extract_log(log_path):
                 if "}" not in fb[-12:] : 
                        fb +=  "}"
                 """
-                d = eval (fb)
-                dic[fa-1] = d
+                try : 
+                    d = eval (fb)
+                    dic[fa-1] = d
+                except :  
+                    fb = fb.replace("'s", " s")
+                    fb = fb.replace("l'", " l")
+                    try : 
+                        d = eval (fb)
+                        dic[fa-1] = d
+                    except : "at least we tried ! "
+                
                
             return  file, dic
 

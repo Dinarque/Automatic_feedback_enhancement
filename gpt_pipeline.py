@@ -92,76 +92,7 @@ def correction_prompt(chunk) :
         
         return output.content, cb
 
-def correction_prompt5(chunk) : 
-    
-    p = "You're aiding a French teacher in correcting a student's writing. Your objective is to provide a Python dictionary in your response with four fields. The fields should be:\n\n1. 'Type': Begin with 'vocabulary' for vocabulary-related mistakes, or 'grammar' for grammar mistakes.\n2.'Corrected Sentence': Furnish the corrected version of the sentence. Prioritize generating a corrected version of the sentence. \n3. 'Label': For vocabulary errors, provide a python dictionnary containing the incorrect French word, its accurate form, and its English equivalents. For grammar errors, use a label of under 10 words.  \n4. 'Explanation': Offer a comprehensive explanation of the mistake to the student."
-    p2 = f'In the sentence """{chunk.sentence }""", the teacher s comment """{chunk.annot}""" refers to the segment """{chunk.highlight}""".'
-    
-    
-    chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
-    messages = [
-    SystemMessage(content=p),
-    HumanMessage(content=p2)
-    ]
-    output = chat(messages)
-    return output.content
-
-
-def correction_prompt4(chunk) :
-    
-    
-    p = "You're assisting a French teacher in correcting a student's writing. Your task is to explain the mistake in the segment highlighted by the teacher and correct only the indicated error in the given segment. Begin your anser with either the word *vocabulary* for vocabulary-related mistakes, or *grammar* for grammar mistakes. Then, within brackets, provide additional details about the mistake. For vocabulary mistakes, provide the incorrect French word, its correct form, and its English equivalents. For grammar mistakes, label the error in under 10 words. After that, offer a thorough explanation of the mistake to the student."
-    #p+= 'In the sentence """{sentence }""", the teacher s comment """{comment}""" refers to the segment """{segment}""".'
-    p2 = f'In the sentence """{chunk.sentence }""", the teacher s comment """{chunk.annot}""" refers to the segment """{chunk.highlight}""".'
-    
-    
-    chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
-    messages = [
-    SystemMessage(content=p),
-    HumanMessage(content=p2)
-    ]
-    output = chat(messages)
-    return output.content
-
-def correction_prompt2(chunk) :
-    
-    
-    p = "You are helping a french teacher correct his student’s writing. you must explain the mistake the teacher highlighted to the student. You must only correct the mistake highlighted by the teacher in the small segment "
-    p+= 'If the student did a mistake because he didn’t chose the right vocabulary word, the answer must begin with """vocabulary""". If it is a grammar mistake, label the mistake with a short expression (for instance """"use of the article""", """subjunctive""") and begin the answer with this label. Do not just write """grammar""" but a more precise description of the mistake'
-    p+= "after the label you can begin the complete explanation"
-    
-    p2 =  f'In the sentence """{chunk.sentence }""", the teacher wrote the following comment """{chunk.annot}""" on the segment """{chunk.highlight}""". '
-    
-    
-    
-    
-    chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
-    messages = [
-    SystemMessage(content=p),
-    HumanMessage(content=p2)
-    ]
-    output = chat(messages)
-    return output.content
-
-
-def correction_prompt3 (chunk) :
-    
-    p1 = "You are helping a french teacher correct his student’s writing. you must explain the mistake the teacher highlighted to the student. You must only correct the mistake highlighted by the teacher in the small segment. Be straightforward and technical "
-    p = 'If the student did a mistake because he didn’t chose the right vocabulary word, the answer must begin with """vocabulary""". If it is a grammar mistake, label the mistake with a short expression and begin the answer with this label. Do not just write """grammar""" but a more precise description of the mistake'
-    p+= "after the label you can begin the complete explanation and suggest a corrected version for the faulty fragment only"
-    
-    p+=  f'In the sentence """{chunk.sentence }""", the teacher wrote the following comment """{chunk.annot}""" on the segment """{chunk.highlight}""". '
-    
-    
-    
-    
-    chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
-    messages = [
-    SystemMessage(content=p1),
-    HumanMessage(content=p)
-    ]
-    output = chat(messages)
-    return output.content
+## travail à faire avec labels
     
 
 def wordreference_link(word, language):
