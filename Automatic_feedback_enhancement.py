@@ -367,7 +367,7 @@ else :
                 if st.button("Correct a batch of 10") :
                     
                     
-                    for i  in range(st.session_state.displayed_chunk, min( (st.session_state.displayed_chunk+10), len(st.session_state.chunks))) :
+                    for i  in stqdm(range(st.session_state.displayed_chunk, min( (st.session_state.displayed_chunk+10), len(st.session_state.chunks)))) :
                         if i not in st.session_state.chunk_analysis.keys() : 
                             answer, cb  = correction_prompt(st.session_state.chunks[i])
                             update_cost(st.session_state, cb)
@@ -378,7 +378,7 @@ else :
             if z3.button("Correct all") :
                    
                     for i in stqdm(range(len(st.session_state.chunks)))  :
-                        st.write(f"chunk {i} corrected ")
+                       
                         
                         if i not in st.session_state.chunk_analysis.keys() : 
                             answer, cb  = correction_prompt(st.session_state.chunks[i])

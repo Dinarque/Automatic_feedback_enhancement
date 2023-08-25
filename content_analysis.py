@@ -18,6 +18,7 @@ def get_data(session_state) :
     for k in session_state.chunk_analysis.keys() : 
         if type (session_state.chunk_analysis[k]) is not dict :
                  session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("'s ", " s ")
+                 session_state.chunk_analysis[k] = session_state.chunk_analysis[k].replace ("l' ", " l ")
                  session_state.chunk_analysis[k] = eval(session_state.chunk_analysis[k])
     ## analyse 
     idx = [int(k) for k in session_state.chunk_analysis ]
@@ -86,8 +87,9 @@ def get_data(session_state) :
                 
                 for top in topics : st.write(top)
                 
-                for top in  topics :
-                   
+                
+                for i in stqdm(range(len(topics))):
+                    top = topics[i]
                     synth, cb = write_synthesis(top, session_state)
                     update_cost(session_state, cb)
                     lab_to_lesson[top] = synth
