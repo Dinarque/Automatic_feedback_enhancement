@@ -21,7 +21,7 @@ def create_folder(folder_name):
 
 
 def create_log(file_name, logs_folder="logs"):
-    file_name = file_name.split(".pdf")[0] + "_correction_log_v8"
+    file_name = file_name.split(".pdf")[0] + "_correction_log"
     create_folder("logs")
     
     path =  os.path.join(logs_folder, file_name)
@@ -43,14 +43,14 @@ def update_log(file_path, content):
             print("Content appended successfully.")
     except Exception as e:
         print(f"An error occurred: {e}")
-
+"""
 def erase_log(file_path) : 
     try:
         with open(file_path, 'w') as file:
             file.close()
     except Exception as e:
         print(f"An error occurred: {e}")
-
+"""
 
 def eliminate(liste, text) :
     for el in liste :

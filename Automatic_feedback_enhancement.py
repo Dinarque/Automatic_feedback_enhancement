@@ -20,16 +20,14 @@ button= False
 import streamlit as st
 import nltk
 import os
-from  pdf_extractor_done import get_composition, base_extractor 
+from  pdf_extractor_done import  base_extractor 
 from dotenv import load_dotenv , find_dotenv 
 load_dotenv(find_dotenv(), override=True)
-from displaying_tools import just, l, centered_title, title, centered_button,  colour_html, add_alinea
-from logs import create_log, update_log, extract_log, erase_log, log_price
+from displaying_tools import  l, title,  colour_html, add_alinea
+from logs import create_log, update_log, extract_log, log_price
 from content_analysis import get_data, create_review 
-
 if Link_2_GPT : 
-    from gpt_pipeline import correction_prompt, correction_prompt2, sum_up, create_extra, streamlit_chat, update_cost, create_exo
-
+    from gpt_pipeline import correction_prompt,  sum_up, create_extra, streamlit_chat, update_cost, create_exo
 from stqdm import stqdm
 
 
@@ -55,9 +53,6 @@ if "OPENAI_API_KEY" not in st.session_state:
     
 if "token_used" not in st.session_state:
     st.session_state.token_used = 0
-
-if "price" not in st.session_state:
-    st.session_state.price = 0
 
 if "buffer" not in st.session_state : 
     st.session_state.buffer = "buffer"
@@ -575,6 +570,4 @@ else :
         
         l("This app aims at helping students review and correct their writing in a foreign language. You have to upload a corrected pdf file where the mistakes have been highlighted by an educator. The work will be divided into chunks and the application will call a Large Language Model to help provide a more detailed feedback. For each chunk, grammatical or vocabular explanation will be provided. You will be able to request further exercises. At the end of the session, all the information will be gathered in a synthetic pdf that will work as a revision tool.  Enjoy :100: !  ")
            
-
- 
 if dvlper_mode : st.session_state
