@@ -191,31 +191,5 @@ def create_review(session_state , file_name= 'Review document'):
             for e in el : 
                 doc.add_paragraph(f'{e} : {wordreference_link(e, "fr")}')
         
-            
-            
-                
-    
-
-
     doc.save('review_document.docx')
     
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

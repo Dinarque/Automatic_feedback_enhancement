@@ -9,6 +9,7 @@ import PyPDF2
 import fitz
 import re
 import nltk
+nltk.download('punkt')
 from annotation import comment
 
 def get_composition(pdf_file, bavard = False) : 
