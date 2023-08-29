@@ -314,7 +314,7 @@ else :
 
     elif st.session_state.mission == "stat" :
         get_data(st.session_state)
-        if st.button("Come back to the menu") : 
+        if st.button("Back to the menu") : 
             display_menu(True)
             set_mission(False)
             st.experimental_rerun() 
