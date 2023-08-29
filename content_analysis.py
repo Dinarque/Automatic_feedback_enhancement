@@ -70,7 +70,15 @@ def get_data(session_state) :
             dic_labels , cb = label_analysis(labels)
             update_cost(session_state, cb)
             session_state.labels = dic_labels
-        dic_labels = eval(session_state.labels)
+        try : 
+            dic_labels = eval(session_state.labels)
+        except : 
+            dic_labels , cb = label_analysis(labels)
+            update_cost(session_state, cb)
+            session_state.labels = dic_labels
+            st.experimental_rerun()
+            print("delusion")
+        
         st.subheader("Classification of the student's grammar mistakes")
         st.write(dic_labels)
         st.write("___")
