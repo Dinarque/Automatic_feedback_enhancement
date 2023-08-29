@@ -171,9 +171,19 @@ def create_review(session_state , file_name= 'Review document'):
         doc.add_heading(f'Mistake {i}', 1)
         doc.add_paragraph(session_state.chunks[i].sentence)
         if i in session_state.chunk_analysis.keys():
-            for k in session_state.chunk_analysis[i].keys() :
-                doc.add_heading( str(k)+" :",2)
-                doc.add_paragraph(str(session_state.chunk_analysis[i][k]))
+            
+            
+            try : 
+                for k in session_state.chunk_analysis[i].keys() :
+                    doc.add_heading( str(k)+" :",2)
+                    doc.add_paragraph(str(session_state.chunk_analysis[i][k]))
+            
+            except : 
+                try : 
+                    session_state.chunk_analysis[i] = eval(session_state.chunk_analysis[i])
+                    for k in session_state.chunk_analysis[i].keys() :
+                        doc.add_heading( str(k)+" :",2)
+                except : print("delusion")
                 
     if "synthesis" in session_state :
     
