@@ -203,11 +203,11 @@ def create_review(session_state , file_name= 'Review document'):
     if "vocabulary" in session_state :
     
         doc.add_heading('III) Vocabulary to study',0)
-        
-        voc = session_state.vocabulary["fr"]
-        for el in voc : 
-            for e in el : 
-                doc.add_paragraph(f'{e} : {wordreference_link(e, "fr")}')
-        
+        try : 
+            voc = session_state.vocabulary["fr"]
+            for el in voc : 
+                for e in el : 
+                    doc.add_paragraph(f'{e} : {wordreference_link(e, "fr")}')
+        except : print("Bibou")
     doc.save('review_document.docx')
     
