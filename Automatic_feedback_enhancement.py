@@ -153,7 +153,7 @@ with st.sidebar :
                 st.session_state.name = st.session_state.file.name
                 st.session_state.log_path = path
                 st.session_state.buffer = file.name
-                if not api_key :
+                if not api_key  or api_key =="Already filled in this tryout version" :
                     os.environ['OPENAI_API_KEY'] = "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"
                     st.session_state.OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
                     
