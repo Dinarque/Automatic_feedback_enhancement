@@ -182,7 +182,6 @@ if st.session_state.display_menu :
     
     l("Thanks for uploading a file.  You can now display it or proceed to correction", position="center")
     "___"
-    st.image("https://cdn.pixabay.com/photo/2016/10/21/00/50/editing-1756958_1280.jpg")
     left, mid, mid2, mid3,  right = st.columns(5)
     with left :  
         if st.button(label="Display") :
@@ -218,6 +217,9 @@ if st.session_state.display_menu :
             display_menu(False)
             set_mission("pdf")
             st.experimental_rerun() 
+    "___"      
+    st.image("https://cdn.pixabay.com/photo/2016/10/21/00/50/editing-1756958_1280.jpg")
+   
     
 
 else :   
