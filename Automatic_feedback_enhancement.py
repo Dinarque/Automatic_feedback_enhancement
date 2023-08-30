@@ -57,6 +57,9 @@ if "token_used" not in st.session_state:
 if "buffer" not in st.session_state : 
     st.session_state.buffer = "buffer"
     
+if "disp_price" not in st.session_state : 
+    st.session_state.buffer = False
+    
 st.session_state.name = ""
     
 def set_mission(pm):
@@ -74,22 +77,21 @@ def launch_extraction() :
     
 
 def cleanse(session_state) : 
-    
     session_state.chunk_analysis = {}
     session_state.synthesis = {}
     session_state.summary = None
     session_state.vocabulary = None 
     session_state.displayed_chunk = 0
+    #
+    session_state.chunks = []
     
     
 import PyPDF2
 def pdf_read(file) :
     
         pdf_reader = PyPDF2.PdfReader(file)
-        
         # Initialize a variable to store the PDF text
         pdf_text = ""
-    
         # Iterate through each page and extract text
         for page_num in range(len(pdf_reader.pages)):
             page = pdf_reader.pages[page_num]
@@ -112,7 +114,7 @@ with st.sidebar :
     with c2 : st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png")
     
     "___"
-    api_key = st.text_input("OpenAI API Key", type="password")
+    api_key = st.text_input("OpenAI API Key",value="Already filled in this tryout version",  type="password")
     if api_key: 
         os.environ['OPENAI_API_KEY'] = api_key
      
@@ -131,45 +133,40 @@ with st.sidebar :
         if file is not None and file.name != st.session_state.buffer :
             if  lb.button(label="launch feedback") :
                 cleanse(st.session_state)
-                lb.download_button( "copycat", data=file, file_name='copycat.pdf')
                 display_menu(True)
-                st.subheader ("we re clean")
                 h = launch_extraction()
                 path = create_log(file.name)
                 st.session_state.name = st.session_state.file.name
-               
                 st.session_state.log_path = path
                 st.session_state.buffer = file.name
                 if not api_key :
                     os.environ['OPENAI_API_KEY'] = "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"
                     st.session_state.OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+                    
         elif file is not None and file.name == st.session_state.buffer : 
-            if lb.button("Come back to the menu") : 
+            if lb.button("Menu") : 
                      display_menu(True)
                      set_mission(False)
                      st.experimental_rerun() 
+                     
         if "log_path" in st.session_state :
                 if rb.button("load from log") :
                     
-                    st.session_state.log_path
-                    
                     file, log_analysis  = extract_log(st.session_state.log_path)
-                    file
-                    l("log analysis")
-                    log_analysis 
                     st.session_state.chunk_analysis = log_analysis
                     
                 
-                if tb.button("update prices") :
-                    log_price(st.session_state.log_path, st.session_state.token_used, st.session_state.price)
-                    
+                if tb.button("display cost") :
+                    st.session_state.disp_price = not st.session_state.disp_price
+                if st.session_state.disp_price : 
+                    st.write (st.session_state.price)
         
                 
 ## menu
 
 if st.session_state.display_menu :   
     
-    l("Thanks for uploading a file.  Do you want to display it ?", position="center")
+    l("Thanks for uploading a file.  You can now display it or proceed to correction", position="center")
     "___"
     st.image("https://st2.depositphotos.com/1000938/5499/i/450/depositphotos_54998613-stock-photo-ginger-cat.jpg")
     left, mid, mid2, mid3,  right = st.columns(5)
@@ -180,7 +177,7 @@ if st.session_state.display_menu :
             st.experimental_rerun() 
             
     with right : 
-        if st.button(label="take a picture") :
+        if st.button(label="Tutorial") :
             display_menu(False)
             set_mission("pic")
             st.experimental_rerun() 
@@ -200,7 +197,7 @@ if st.session_state.display_menu :
     with mid3 :
         if st.button(label="Generate review pdf") : 
             if "summary" not in st.session_state :
-                summary, cb = sum_up(st.session_state.str_file)
+                summary, cb = sum_up(st.session_state)
                 update_cost(st.session_state, cb)
                 st.session_state.summary = summary
             create_review(st.session_state)
@@ -483,7 +480,7 @@ else :
                     
                     if st.button("Generate an exercise ") :
                         if "summary" not in st.session_state :
-                            summary, cb = sum_up(st.session_state.str_file)
+                            summary, cb = sum_up(st.session_state)
                             update_cost(st.session_state, cb)
                             st.session_state.summary = summary
                             
@@ -502,7 +499,7 @@ else :
                     if st.button("Regenerate another exercise ") :
                         
                         if "summary" not in st.session_state :
-                            summary, cb = sum_up(st.session_state.str_file)
+                            summary, cb = sum_up(st.session_state)
                             update_cost(st.session_state, cb)
                             st.session_state.summary = summary
                         exo, cb = create_exo(dic, st.session_state.summary)

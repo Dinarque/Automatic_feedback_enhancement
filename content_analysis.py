@@ -13,8 +13,11 @@ from logs import create_folder
 from fpdf import FPDF
 from gpt_pipeline import wordreference_link, correction_prompt
 
+
+### or move exception handling to main code not to have to repeat it several times
+
 def get_data(session_state) :
-    st.write(session_state.price)
+    
     for k in session_state.chunk_analysis.keys() : 
         if type (session_state.chunk_analysis[k]) is not dict :
                  try : 
@@ -25,15 +28,8 @@ def get_data(session_state) :
                      val = session_state.chunk_analysis[k].replace ("'s ", " s ")
                      val = val.replace ("l' ", "l ")
                      val = val.replace("l'", " l")
-                     #session_state.chunk_analysis.pop(k)
-                     #k = k.replace ("l' ", "l ")
-                     #k =  k.replace ("'s ", " s ")
-                    
-                     
                      try :
                          session_state.chunk_analysis[k] = eval(session_state.chunk_analysis[k])
-                     
-                 
                      except : 
                         answer, cb = correction_prompt(st.session_state.chunks[k])
                         update_cost(session_state, cb)
@@ -55,7 +51,7 @@ def get_data(session_state) :
     
     
     ## display
-    st.subheader( " Here are some data about the mistakes")
+    st.subheader( "Here are some data about the mistakes")
     st.markdown("Index of grammar mistakes")
     st.markdown(idx_gr)
     st.markdown("Index of Vocabulary mistales")
@@ -63,7 +59,7 @@ def get_data(session_state) :
     
     st.write("___")
     st.markdown("Analysis of the grammar themes evoked : ")
-    if st.button("Launch label_analysis") : 
+    if st.button("Launch label analysis") : 
         
         
         if "labels" not in session_state or session_state.labels == None : 
@@ -89,18 +85,17 @@ def get_data(session_state) :
             for k in dic_labels.keys() :
                 if st.session_state.chunk_analysis[i]["Label"] in dic_labels[k] :
                     lab_to_idx[k].append(i)
-        
-        
-        
+
         lab_to_sent = {} 
         for k in lab_to_idx.keys():
             lab_to_sent[k] = [] 
             for i in  lab_to_idx[k] :
                 lab_to_sent[k].append(session_state.chunks[i].sentence)
+        """
         st.subheader("Link to the sentences")
         st.write (lab_to_sent)
         st.write("___")
-        
+        """
         lab_to_lesson = {}
     
         
@@ -110,7 +105,7 @@ def get_data(session_state) :
         if "labels" in session_state and "synthesis" not in session_state or session_state.synthesis == {}:
             
                 topics = list(dic_labels.keys() )
-                st.subheader ("proceed to synthesis")
+                st.subheader ("We generate extra lectures on the following topics :")
                 st.write(topics)
                 
                 for top in topics : st.write(top)
@@ -123,7 +118,7 @@ def get_data(session_state) :
                     lab_to_lesson[top] = synth
                 session_state.synthesis = lab_to_lesson
                 
-        st.subheader ("Here is synthesis")
+        st.subheader ("Here is this synthesis")
         
         st.write(session_state.synthesis)
         st.write("___")
@@ -143,29 +138,8 @@ def get_data(session_state) :
     st.write(words)
     st.write("___")
 
-"""
 
-def create_review(session_state , lab_to_lesson ,file_name):
-    from docx import Document
-    from docx.shared import Inches
-    
-    
-      
-    doc = Document() 
-    doc.add_heading("Review document" , 0)
-    p = doc.add_paragraph(session_state.summary)
-    
-    doc.add_page_break()
-    
-    doc.add_heading("Grammar : ", level = 1)
-    
-    for k in lab_to_lesson.keys():
-        doc.add_heading(k+" :", level =2)
-        pk = doc.add_paragraph(lab_to_lesson[k])
-    
-    doc.save('review.docx')
 
-"""
 def create_review(session_state , file_name= 'Review document'):
     
     import docx
@@ -208,6 +182,7 @@ def create_review(session_state , file_name= 'Review document'):
             for el in voc : 
                 for e in el : 
                     doc.add_paragraph(f'{e} : {wordreference_link(e, "fr")}')
-        except : print("Bibou")
+        except : print("delusion")
+        
     doc.save('review_document.docx')
     

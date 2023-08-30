@@ -19,10 +19,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.callbacks import get_openai_callback
 
 os.environ["OPENAI_API_KEY"] = "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"
-
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
-
 encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
 model_prompt = "text-davinci-003"
 model_chat = "gpt-3.5-turbo"
@@ -47,28 +44,7 @@ class conversation :
     def add_prompt(self, prompt,  bavard = False) :
         self.history  .append ({"role": "user", "content": prompt})
 
-"""
-redondant et ne semble pas être aussi utile, comparer ses performances avec le simple prompt
 
-class instruction :
-    
-   # Idée l'objet instruction est un objet qui permet de donner des missions plus précises à GPT'
-    
-    def __init__(self, comment, prompt) :
-        self.comment = comment 
-        self.prompt = prompt
-        
-    def interrogate(self, bavard = False) :
-        
-        completion = openai.Edit.create(
-                model="text-davinci-edit-001",
-                input= self.comment.sentence,
-                instruction=self.prompt
-                            )
-        
-        return completion
-
-"""
         
 def simple_prompt(prompt) : 
     
@@ -119,8 +95,10 @@ def create_extra(dic, sentence, session_state):
     else : 
         return create_extra_gram(sentence, dic, session_state)
 
-def sum_up(composition, language = "english") :
+def sum_up(session_state) :
     
+    composition = session_state.str_file
+    language = session_state.target
     sm = f"sum up in {language} in three sentences the following text"
     hm = f" text : '''{composition}''' "
     chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
