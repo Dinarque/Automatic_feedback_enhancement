@@ -225,16 +225,11 @@ else :
      ## pic   
     
     if st.session_state.mission == "pic" : 
-        st.subheader("Take a picture")
-        camera_photo = st.camera_input(".")
-        
-        
-        if camera_photo :
-            st.image(camera_photo)
-        
-        
+        st.subheader("Access a tutorial")
        
-        if st.button("Come back to the menu, silly ?") : 
+        st.write(" open in your browser [link](https://drive.google.com/file/d/1X3tsGjavG_mwRWdEcUnKhW3dZfG1CWFF/view?usp=sharing)")
+       
+        if st.button("Come back to the menu") : 
             display_menu(True)
             set_mission(False)
             st.experimental_rerun() 
