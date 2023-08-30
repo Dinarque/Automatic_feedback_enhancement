@@ -45,7 +45,7 @@ def get_composition(pdf_file, bavard = False) :
     #pdf_file.close()
     
     
-    return text
+    return text.replace("   ", " ")
     
     
 
