@@ -20,7 +20,7 @@ button= False
 import streamlit as st
 import nltk
 import os
-from  pdf_extractor_done import  base_extractor 
+from  pdf_extractor_done import  base_extractor , get_composition
 from dotenv import load_dotenv , find_dotenv 
 load_dotenv(find_dotenv(), override=True)
 from displaying_tools import  l, title,  colour_html, add_alinea
@@ -71,7 +71,7 @@ def display_menu (bol = True):
 def launch_extraction() :
     with open("buffer.pdf", "wb") as f:
         f.write(st.session_state.file.getbuffer())
-    st.session_state.str_file = pdf_read(st.session_state.file)
+    st.session_state.str_file = get_composition("buffer.pdf")
     st.session_state.chunks= base_extractor("buffer.pdf", st.session_state.str_file)
     st.session_state.nb_chunks = len(st.session_state.chunks)
     
