@@ -97,6 +97,20 @@ def pdf_read(file) :
             page = pdf_reader.pages[page_num]
             pdf_text += page.extract_text()
         return pdf_text
+    
+    
+def correct_all(session_state) :
+    
+    for i in stqdm(range(len(session_state.chunks)))  :
+       
+        
+        if i not in session_state.chunk_analysis.keys() : 
+            answer, cb  = correction_prompt(session_state.chunks[i])
+            update_cost(st.session_state, cb)
+            session_state.chunk_analysis[i] = answer
+            update_log(session_state.log_path, f'*{i}* \n {answer}  \n \n \n', )
+        else  : st.write(f"chunk {i}  was already corrected ")
+        
 
 ## Main code
 
@@ -371,17 +385,7 @@ else :
                     st.experimental_rerun() 
                             
             if z3.button("Correct all") :
-                   
-                    for i in stqdm(range(len(st.session_state.chunks)))  :
-                       
-                        
-                        if i not in st.session_state.chunk_analysis.keys() : 
-                            answer, cb  = correction_prompt(st.session_state.chunks[i])
-                            update_cost(st.session_state, cb)
-                            st.session_state.chunk_analysis[i] = answer
-                            update_log(st.session_state.log_path, f'*{i}* \n {answer}  \n \n \n', )
-                        else  : st.write(f"chunk {i}  was already corrected ")
-                        
+                    correct_all(st.session_state)
                     st.experimental_rerun() 
             
         else: 
@@ -574,3 +578,7 @@ if dvlper_mode : st.session_state
 for i in range(10) :
     st.write("")
 st.write(" © Automatic Feedback Enhancement App created by Louis Jourdain")
+
+
+
+
