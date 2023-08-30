@@ -128,7 +128,7 @@ with st.sidebar :
     with c2 : st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png")
     
     "___"
-    api_key = st.text_input("OpenAI API Key",value="Already filled in this tryout version",  type="password")
+    api_key = st.text_input("OpenAI API Key (alreaydy pre-entered)",  type="password")
     if api_key: 
         os.environ['OPENAI_API_KEY'] = api_key
      
