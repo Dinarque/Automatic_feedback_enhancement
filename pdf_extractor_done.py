@@ -127,12 +127,15 @@ def base_extractor(path, texte) :
     chunks = []
     for h in st.session_state.highlight :
         com = comment(c)
-        candidats =  [ el for el in  high_2_sent[h] if sents.index( el) >= idx ]
-        if len(candidats) != 0 :
-            senten = candidats[0]
-            sent_considered = senten 
-            idx = sents.index( sent_considered )
-        else : senten = "oopsie"
+        cand = candide(high_2_sent[h])
+        if len(cand) == 1 : senten = cand[0]
+        else : 
+            candidats =  [ el for el in  high_2_sent[h] if sents.index( el) >= idx ]
+            if len(candidats) != 0 :
+                senten = candidats[0]
+                sent_considered = senten 
+                idx = sents.index( sent_considered )
+            else : senten = "oopsie"
         com.sentence = senten
         #st.session_state.sentence.append(senten)
         com.highlight = h
@@ -164,3 +167,4 @@ def find_sentences_with_string(sent, text):
     return "Oupsie"
 
 
+def candide(liste) : return [el for el in liste if el != False]
