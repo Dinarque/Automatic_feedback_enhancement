@@ -58,7 +58,7 @@ if "buffer" not in st.session_state :
     st.session_state.buffer = "buffer"
     
 if "disp_price" not in st.session_state : 
-    st.session_state.buffer = False
+    st.session_state.disp_price = False
     
 st.session_state.name = ""
     
