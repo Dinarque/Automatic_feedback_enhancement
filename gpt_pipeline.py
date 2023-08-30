@@ -131,8 +131,8 @@ def create_extra_gram (sent, dic, session_state) :
      
 def create_exo(dic, summary) :
     
-    sm = f"Compose a grammar exercise focusing on the specified french grammar point. The sentences of the exercise must be in french and connected to the theme provided. Provide clear instructions and five questions. Respond in the format of a Python dictionary with two fields: 'exercise' and 'answer_key'. The values must be normal text"
-    hm = f"grammar point : *{dic['Extra']}*, theme :*{summary}"
+    sm = f"Compose a grammar exercise focusing on the specified french grammar point. Your examples must be related to the provided topic . The sentences of the exercise must be in french and connected to the theme provided. Provide clear instructions and five questions. Respond in the format of a Python dictionary with two fields: 'exercise' and 'answer_key'. The values must be normal text"
+    hm = f"grammar point : *{dic['Extra']}*, topic :*{summary}"
     
     chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.5, max_tokens=1024)
     messages = [

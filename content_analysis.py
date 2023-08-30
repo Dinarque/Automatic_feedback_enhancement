@@ -150,7 +150,7 @@ def create_review(session_state , file_name= 'Review document'):
     doc.add_heading('I) Study of all the individual mistakes',0)
     
     for i in range(len(session_state.chunks)) :
-        doc.add_heading(f'Mistake {i}', 1)
+        doc.add_heading(f'Mistake {i+1}', 1)
         doc.add_paragraph(session_state.chunks[i].sentence)
         if i in session_state.chunk_analysis.keys():
             
