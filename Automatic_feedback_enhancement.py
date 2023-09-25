@@ -4,7 +4,6 @@ Created on Tue Aug  1 14:12:42 2023
 
 @author: 3b13j  
 """
-## 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
 
 ## code hyperparameters
 
@@ -81,8 +80,7 @@ def cleanse(session_state) :
     session_state.synthesis = {}
     session_state.summary = None
     session_state.vocabulary = None 
-    session_state.displayed_chunk = 0
-    #
+    session_state.displayed_chunk = None
     session_state.chunks = []
     
     
@@ -332,7 +330,7 @@ else :
         
         
         
-        if st.session_state.displayed_chunk == False : 
+        if st.session_state.displayed_chunk == False  and len(st.session_state.chunks) != 0 : 
             
             st.session_state.displayed_chunk = 0
             
