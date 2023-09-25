@@ -122,29 +122,31 @@ def base_extractor(path, texte) :
     #st.session_state.sentence=[]
     c = 0
     
-    sent_considered = sents[0]
-    idx = sents.index( sent_considered )
-    chunks = []
-    for h in st.session_state.highlight :
-        com = comment(c)
-        cand = candide(high_2_sent[h])
-       
-        candidats =  [ el for el in  high_2_sent[h] if sents.index( el) >= idx ]
-        if len(candidats) != 0 :
-                senten = candidats[0]
-                sent_considered = senten 
-                idx = sents.index( sent_considered )
-        else : 
-            if len(cand) == 1 : senten = cand[0]
+    try : 
+        sent_considered = sents[0]
+        idx = sents.index( sent_considered )
+        chunks = []
+        for h in st.session_state.highlight :
+            com = comment(c)
+            cand = candide(high_2_sent[h])
+           
+            candidats =  [ el for el in  high_2_sent[h] if sents.index( el) >= idx ]
+            if len(candidats) != 0 :
+                    senten = candidats[0]
+                    sent_considered = senten 
+                    idx = sents.index( sent_considered )
             else : 
-                senten = "oopsie"
-        com.sentence = senten
-        #st.session_state.sentence.append(senten)
-        com.highlight = h
-        com.annot = dic[h]
-        c+=1
-        if com.annot != "" : chunks.append(com)
-    return chunks
+                if len(cand) == 1 : senten = cand[0]
+                else : 
+                    senten = "oopsie"
+            com.sentence = senten
+            #st.session_state.sentence.append(senten)
+            com.highlight = h
+            com.annot = dic[h]
+            c+=1
+            if com.annot != "" : chunks.append(com)
+        return chunks
+    except : return []
  
 def sort_dict_by_values(input_dict):
     sorted_dict = dict(sorted(input_dict.items(), key=lambda item: item[1]))
