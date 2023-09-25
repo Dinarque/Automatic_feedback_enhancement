@@ -4,7 +4,7 @@ Created on Tue Aug  1 14:12:42 2023
 
 @author: 3b13j  
 """
-
+## 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
 
 ## code hyperparameters
 
@@ -154,7 +154,7 @@ with st.sidebar :
                 st.session_state.log_path = path
                 st.session_state.buffer = file.name
                 if not api_key  or api_key =="Already filled in this tryout version" :
-                    os.environ['OPENAI_API_KEY'] = "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"
+                    os.environ['OPENAI_API_KEY'] = ""
                     st.session_state.OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
                     
         elif file is not None and file.name == st.session_state.buffer : 
