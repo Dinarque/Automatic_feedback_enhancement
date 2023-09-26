@@ -112,7 +112,9 @@ def base_extractor(pdf_file, texte):
                         final_sentence = sentences [final_i]
                     except : 
                         final_sentnce = candidates[0]
-                    thresh = sentences.index(final_sentence)
+                    
+                    try: thresh = sentences.index(final_sentence)
+                    except :  print("modif failed")
                 
                 highlights.append([highlight, final_sentence, annotation.info.get("content", "")])
 
