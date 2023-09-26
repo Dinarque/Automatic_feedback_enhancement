@@ -350,6 +350,9 @@ else :
             
             "___"
                  
+            
+            chunk
+            
             if colored : 
                 from displaying_tools import markdown_underline 
                 mkd = markdown_underline(chunk.sentence, chunk.highlight)
