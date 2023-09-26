@@ -8,7 +8,7 @@ Created on Tue Aug  1 14:12:42 2023
 ## code hyperparameters
 
 Link_2_GPT = True
-dvlper_mode = False
+dvlper_mode = True
 colored = True
 
 button= False
@@ -28,6 +28,7 @@ from content_analysis import get_data, create_review
 if Link_2_GPT : 
     from gpt_pipeline import correction_prompt,  sum_up, create_extra, streamlit_chat, update_cost, create_exo
 from stqdm import stqdm
+from ocr import ocr_path
 
 
 ## setting the streamlit session state
@@ -70,9 +71,13 @@ def display_menu (bol = True):
 def launch_extraction() :
     with open("buffer.pdf", "wb") as f:
         f.write(st.session_state.file.getbuffer())
-    st.session_state.str_file = get_composition("buffer.pdf")
-    st.session_state.chunks= base_extractor("buffer.pdf", st.session_state.str_file)
-    st.session_state.nb_chunks = len(st.session_state.chunks)
+    try :
+        st.session_state.str_file = get_composition("buffer.pdf")
+        st.session_state.chunks= base_extractor("buffer.pdf", st.session_state.str_file)
+        st.session_state.nb_chunks = len(st.session_state.chunks)
+    except :
+        ocr_path("buffer.pdf")
+        launch_extraction()
     
 
 def cleanse(session_state) : 

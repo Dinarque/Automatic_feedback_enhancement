@@ -66,7 +66,7 @@ def ocr(file) :
          
     return pages_df
 """
-
+"""
 
 
 
@@ -113,9 +113,7 @@ def ocr(PDF_file):
     with TemporaryDirectory() as tempdir:
         # Create a temporary directory to hold our temporary images.
  
-        """
-        Part #1 : Converting PDF to images
-        """
+      
  
         if platform.system() == "Windows":
             pdf_pages = convert_from_path(
@@ -135,9 +133,7 @@ def ocr(PDF_file):
             page.save(filename, "JPEG")
             image_file_list.append(filename)
  
-        """
-        Part #2 - Recognizing text from the images using OCR
-        """
+       
         pages = []
         for image_file in image_file_list:
  
@@ -146,11 +142,11 @@ def ocr(PDF_file):
             pages.append(text)
         return pages
 
-
+"""
 
 import ocrmypdf
-def ocr_pdf(path) : 
-    ocrmypdf.ocr(path, "ocr.pdf", skip_text= True )
+def ocr_path(path) : 
+    ocrmypdf.ocr(path, path, skip_text= True )
 
 
 
