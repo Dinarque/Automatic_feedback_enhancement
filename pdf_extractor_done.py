@@ -49,7 +49,7 @@ def get_composition(pdf_file, bavard = False) :
     
     
 
-def base_extractor(path, texte) : 
+def base_extractor(path, texte, bavard = False) : 
     
      
 
@@ -64,6 +64,9 @@ def base_extractor(path, texte) :
         page = pdf_document.load_page(page_n)
         all_words = page.get_text("words")
         page_annotations = page.annots()
+        if bavard : 
+            #print(all_words)
+            print(list(page_annotations))
 
         # Get all words on the current page
       
@@ -84,16 +87,17 @@ def base_extractor(path, texte) :
     date = sort_dict_by_values(date)
     
     sents = nltk.sent_tokenize(texte)
-    st.session_state.highlight = list(date.keys())
-    #st.session_state.texte = sents
+    
+    highlights = list(date.keys())
+    try  : st.session_state.highlight = highlights
+    except :  print("no session_state involved")
     matrix  = {}
-    for h in st.session_state.highlight :
+    for h in highlights :
         matrix[h] = []
         for sent in sents : 
-            if  h in sent : matrix [h].append(sent) 
-            
+            if  h in sent : matrix [h].append(sent)    
             else :  matrix[h].append (h in sent)
-    #st.session_state.matrix= matrix 
+
     
     high_2_sent = {}
     for h in matrix.keys() :
@@ -102,31 +106,13 @@ def base_extractor(path, texte) :
             if el != False :
                 high_2_sent[h].append(el)
                 
-    #st.session_state.high_2_sent = high_2_sent
-    ## idée ; faire sur nombre d annot avec texte fouillé décroissant. pour ce faire matrice stocke liste de True, et on prend le premier 
-    
-    
-    """
-    
-  
-    c = 0 
-    for sent in texte :
-        for high in st.session_state.highlights :
-            if high in sent :
-                com = comment(c)
-                com.sentence = sent
-                com.highlight = high
-                com.annot = dic[high]
-    
-    """
-    #st.session_state.sentence=[]
     c = 0
     
     try : 
         sent_considered = sents[0]
         idx = sents.index( sent_considered )
         chunks = []
-        for h in st.session_state.highlight :
+        for h in highlights :
             com = comment(c)
             cand = candide(high_2_sent[h])
            
@@ -140,13 +126,13 @@ def base_extractor(path, texte) :
                 else : 
                     senten = "oopsie"
             com.sentence = senten
-            #st.session_state.sentence.append(senten)
+         
             com.highlight = h
             com.annot = dic[h]
             c+=1
             if com.annot != "" : chunks.append(com)
         return chunks
-    except : return []
+    except : return ["caribou"]
  
 def sort_dict_by_values(input_dict):
     sorted_dict = dict(sorted(input_dict.items(), key=lambda item: item[1]))
