@@ -71,13 +71,16 @@ def display_menu (bol = True):
 def launch_extraction() :
     with open("buffer.pdf", "wb") as f:
         f.write(st.session_state.file.getbuffer())
-    try :
+
         st.session_state.str_file = get_composition("buffer.pdf")
+        if st.session_state.str_file == "" or st.session_state.str_file == None : 
+            ocr_path("buffer.pdf")
+            st.session_state.str_file = get_composition("buffer.pdf")
+            
         st.session_state.chunks= base_extractor("buffer.pdf", st.session_state.str_file)
         st.session_state.nb_chunks = len(st.session_state.chunks)
-    except :
-        ocr_path("buffer.pdf")
-        launch_extraction()
+
+      
     
 
 def cleanse(session_state) : 
