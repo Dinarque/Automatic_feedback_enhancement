@@ -164,6 +164,7 @@ with st.sidebar :
                 if not api_key  or api_key =="Already filled in this tryout version" :
                     os.environ['OPENAI_API_KEY'] = ""
                     st.session_state.OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+                st.experimental_rerun
                     
         elif file is not None and file.name == st.session_state.buffer : 
             if lb.button("Menu") : 
@@ -340,9 +341,7 @@ else :
         
         
         
-        if st.session_state.displayed_chunk == False  and len(st.session_state.chunks) != 0 : 
-            
-            st.session_state.displayed_chunk = 0
+        st.session_state.displayed_chunk = 0
             
     
         try : 
