@@ -335,232 +335,233 @@ else :
             st.session_state.displayed_chunk = 0
             
     
-        
-        chunk = st.session_state.chunks [st.session_state.displayed_chunk]
-        title(f"Chunk n°{st.session_state.displayed_chunk+1}")
-        
-        "___"
-             
-        if colored : 
-            from displaying_tools import markdown_underline 
-            mkd = markdown_underline(chunk.sentence, chunk.highlight)
+        try : 
+            chunk = st.session_state.chunks [st.session_state.displayed_chunk]
+            title(f"Chunk n°{st.session_state.displayed_chunk+1}")
             
-            l(f"Look at the following sentence :'{mkd}'. I quote your teacher : '{chunk.annot}'")
-     
             "___"
-            
-        else: 
-            
-            l(f"In the sentence '{chunk.sentence}', the segment '{chunk.highlight}' is not correct. I quote your dear teacher : '{chunk.annot}'")
-            "___"
-        
-        if st.session_state.displayed_chunk not in st.session_state.chunk_analysis.keys() :
-            z1, z2, z3 = st.columns(3) 
-            
-            with z1 : 
+                 
+            if colored : 
+                from displaying_tools import markdown_underline 
+                mkd = markdown_underline(chunk.sentence, chunk.highlight)
                 
-                
-                if st.button("Correct this segment") :
-                    answer, cb = correction_prompt(chunk)
-                    update_cost(st.session_state, cb)
-                    st.session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
-                    update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
-                    st.experimental_rerun() 
-                    
-            with z2 : 
-                if st.button("Correct a batch of 10") :
-                    
-                    
-                    for i  in stqdm(range(st.session_state.displayed_chunk, min( (st.session_state.displayed_chunk+10), len(st.session_state.chunks)))) :
-                        if i not in st.session_state.chunk_analysis.keys() : 
-                            answer, cb  = correction_prompt(st.session_state.chunks[i])
-                            update_cost(st.session_state, cb)
-                            st.session_state.chunk_analysis[i] = answer
-                            update_log(st.session_state.log_path, f'*{i}* \n {answer}  \n \n \n', )
-                    st.experimental_rerun() 
-                            
-            if z3.button("Correct all") :
-                    correct_all(st.session_state)
-                    st.experimental_rerun() 
-            
-        else: 
-            
-          
-             
-            dic  = (st.session_state.chunk_analysis[st.session_state.displayed_chunk])
-            if type(dic) is not dict  and type(dic) is str : 
-                try  : dic = eval(dic)
-                except : 
-                    answer, cb = correction_prompt(chunk)
-                    update_cost(st.session_state, cb)
-                    st.session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
-                    update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
-                    st.experimental_rerun() 
-        
-            
-            l(f'This is a {dic["Type"]} mistake.')
-            "___"
-            st.subheader("Explanation : ")
-            l(dic["Explanation"])
-            "___"
-            st.subheader("Suggested correction : ")
-            l(dic["Corrected Sentence"])
-            
-            
-            if "Extra" in dic.keys() :
-                "___"
-                if dic["Type"] == "grammar" : st.subheader(f"Lesson on {dic['Label']}) :")
-                else : st.subheader("Here are some ressources :")
-                                                         
-                dic["Extra"]
-                
-                
-            if "Exo" in dic.keys():
+                l(f"Look at the following sentence :'{mkd}'. I quote your teacher : '{chunk.annot}'")
+         
                 "___"
                 
-                st.subheader("Exercise :")
-                dic["Exo"]["exercise"]
-                "\n \n"
-                disp = False 
-                if st.button ("Display answer key") :
-                    disp =True
-                if disp : 
-                    st.subheader("Answer key :")
-                    dic["Exo"]["answer_key"]
+            else: 
                 
+                l(f"In the sentence '{chunk.sentence}', the segment '{chunk.highlight}' is not correct. I quote your dear teacher : '{chunk.annot}'")
+                "___"
             
-            
-            
-            if "Chat" in dic.keys() : 
+            if st.session_state.displayed_chunk not in st.session_state.chunk_analysis.keys() :
+                z1, z2, z3 = st.columns(3) 
                 
-                if dic["Chat"] :
-                    "___"
-                    st.subheader("Virtual assistant")
+                with z1 : 
                     
-                    streamlit_chat(dic, st.session_state.OPENAI_API_KEY)
                     
-                    "___"
-            
-            "___"
-            "if you are not satisfied with this correction, you cantry to run it again"
-            "___"
-            
-            z1, z2, z3= st.columns(3)
-            
-            if "Chat" in dic.keys() and dic["Chat"] :
-                z3_mes ='Hide virtual assistant'
-            else :
-                z3_mes ="Ask our virtual assistant"
-            
-            with z1 : 
-                if st.button("Rerun correction") :
-                    answer, cb = correction_prompt(chunk)
-                    st.session_state.cb = cb
-                    st.session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
-                    update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {answer}  \n \n \n', )
-                    st.experimental_rerun() 
-            
-             
-            with z2 : 
-                if "Extra" not in dic.keys() :  mes = "Display more information"
-                else : mes = "Regenerate extra content"
-                
-                if st.button(mes) :
-                    
-                    extra, cb = create_extra(dic, chunk.sentence, st.session_state)
-                    if dic["Type"] == "grammar" :
+                    if st.button("Correct this segment") :
+                        answer, cb = correction_prompt(chunk)
                         update_cost(st.session_state, cb)
-                    dic["Extra"] = extra
-                    st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
-                    update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
-                    st.experimental_rerun() 
+                        st.session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
+                        update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
+                        st.experimental_rerun() 
+                        
+                with z2 : 
+                    if st.button("Correct a batch of 10") :
+                        
+                        
+                        for i  in stqdm(range(st.session_state.displayed_chunk, min( (st.session_state.displayed_chunk+10), len(st.session_state.chunks)))) :
+                            if i not in st.session_state.chunk_analysis.keys() : 
+                                answer, cb  = correction_prompt(st.session_state.chunks[i])
+                                update_cost(st.session_state, cb)
+                                st.session_state.chunk_analysis[i] = answer
+                                update_log(st.session_state.log_path, f'*{i}* \n {answer}  \n \n \n', )
+                        st.experimental_rerun() 
+                                
+                if z3.button("Correct all") :
+                        correct_all(st.session_state)
+                        st.experimental_rerun() 
+                
+            else: 
+                
+              
+                 
+                dic  = (st.session_state.chunk_analysis[st.session_state.displayed_chunk])
+                if type(dic) is not dict  and type(dic) is str : 
+                    try  : dic = eval(dic)
+                    except : 
+                        answer, cb = correction_prompt(chunk)
+                        update_cost(st.session_state, cb)
+                        st.session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
+                        update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
+                        st.experimental_rerun() 
+            
+                
+                l(f'This is a {dic["Type"]} mistake.')
+                "___"
+                st.subheader("Explanation : ")
+                l(dic["Explanation"])
+                "___"
+                st.subheader("Suggested correction : ")
+                l(dic["Corrected Sentence"])
+                
+                
+                if "Extra" in dic.keys() :
+                    "___"
+                    if dic["Type"] == "grammar" : st.subheader(f"Lesson on {dic['Label']}) :")
+                    else : st.subheader("Here are some ressources :")
+                                                             
+                    dic["Extra"]
                     
-                if "Extra" in dic.keys() and "Exo" not in dic.keys() :
                     
-                    if st.button("Generate an exercise ") :
-                        if "summary" not in st.session_state :
-                            summary, cb = sum_up(st.session_state)
+                if "Exo" in dic.keys():
+                    "___"
+                    
+                    st.subheader("Exercise :")
+                    dic["Exo"]["exercise"]
+                    "\n \n"
+                    disp = False 
+                    if st.button ("Display answer key") :
+                        disp =True
+                    if disp : 
+                        st.subheader("Answer key :")
+                        dic["Exo"]["answer_key"]
+                    
+                
+                
+                
+                if "Chat" in dic.keys() : 
+                    
+                    if dic["Chat"] :
+                        "___"
+                        st.subheader("Virtual assistant")
+                        
+                        streamlit_chat(dic, st.session_state.OPENAI_API_KEY)
+                        
+                        "___"
+                
+                "___"
+                "if you are not satisfied with this correction, you cantry to run it again"
+                "___"
+                
+                z1, z2, z3= st.columns(3)
+                
+                if "Chat" in dic.keys() and dic["Chat"] :
+                    z3_mes ='Hide virtual assistant'
+                else :
+                    z3_mes ="Ask our virtual assistant"
+                
+                with z1 : 
+                    if st.button("Rerun correction") :
+                        answer, cb = correction_prompt(chunk)
+                        st.session_state.cb = cb
+                        st.session_state.chunk_analysis[st.session_state.displayed_chunk] = answer
+                        update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {answer}  \n \n \n', )
+                        st.experimental_rerun() 
+                
+                 
+                with z2 : 
+                    if "Extra" not in dic.keys() :  mes = "Display more information"
+                    else : mes = "Regenerate extra content"
+                    
+                    if st.button(mes) :
+                        
+                        extra, cb = create_extra(dic, chunk.sentence, st.session_state)
+                        if dic["Type"] == "grammar" :
                             update_cost(st.session_state, cb)
-                            st.session_state.summary = summary
-                            
-                        exo, cb = create_exo(dic, st.session_state.summary)
-                        update_cost(st.session_state, cb)
-                        try : dic["Exo"] = eval(exo)
-                        except : 
+                        dic["Extra"] = extra
+                        st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
+                        update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
+                        st.experimental_rerun() 
+                        
+                    if "Extra" in dic.keys() and "Exo" not in dic.keys() :
+                        
+                        if st.button("Generate an exercise ") :
+                            if "summary" not in st.session_state :
+                                summary, cb = sum_up(st.session_state)
+                                update_cost(st.session_state, cb)
+                                st.session_state.summary = summary
+                                
                             exo, cb = create_exo(dic, st.session_state.summary)
                             update_cost(st.session_state, cb)
-                        st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
-                        update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
-                        st.experimental_rerun()
+                            try : dic["Exo"] = eval(exo)
+                            except : 
+                                exo, cb = create_exo(dic, st.session_state.summary)
+                                update_cost(st.session_state, cb)
+                            st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
+                            update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
+                            st.experimental_rerun()
+                            
+                    if "Extra" in dic.keys() and "Exo" in dic.keys() :
                         
-                if "Extra" in dic.keys() and "Exo" in dic.keys() :
-                    
-                    if st.button("Regenerate another exercise ") :
-                        
-                        if "summary" not in st.session_state :
-                            summary, cb = sum_up(st.session_state)
+                        if st.button("Regenerate another exercise ") :
+                            
+                            if "summary" not in st.session_state :
+                                summary, cb = sum_up(st.session_state)
+                                update_cost(st.session_state, cb)
+                                st.session_state.summary = summary
+                            exo, cb = create_exo(dic, st.session_state.summary)
                             update_cost(st.session_state, cb)
-                            st.session_state.summary = summary
-                        exo, cb = create_exo(dic, st.session_state.summary)
-                        update_cost(st.session_state, cb)
-                        dic["Exo"] = eval( exo)
-                        st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
-                        update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
-                        st.experimental_rerun()
+                            dic["Exo"] = eval( exo)
+                            st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
+                            update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
+                            st.experimental_rerun()
+                            
                         
-                    
-                    
-            with z3 : 
-                if st.button(z3_mes) :
-                   if "Chat" not in dic.keys() : dic["Chat"]  = False
-                   dic["Chat"] = not dic["Chat"]
-                   update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
-                   st.experimental_rerun() 
+                        
+                with z3 : 
+                    if st.button(z3_mes) :
+                       if "Chat" not in dic.keys() : dic["Chat"]  = False
+                       dic["Chat"] = not dic["Chat"]
+                       update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
+                       st.experimental_rerun() 
+                
+                "___"
+                
+                
+                
+               
             
-            "___"
+            fc, left, mid, right, lc = st.columns(5)
             
-            
-            
-           
-        
-        fc, left, mid, right, lc = st.columns(5)
-        
-        with fc : 
-            if st.button(label="First chunk")  :
-                st.session_state.displayed_chunk = 0
-                st.experimental_rerun() 
-            
-        with lc : 
-             if st.button(label="Last chunk")  :
-                 st.session_state.displayed_chunk =  len(st.session_state.chunks)-1
-                 st.experimental_rerun() 
-         
-        
-        if st.session_state.displayed_chunk != 0 : 
-            with left :  
-                if st.button(label="Prev chunk")  :
-                    st.session_state.displayed_chunk = st.session_state.displayed_chunk -1
+            with fc : 
+                if st.button(label="First chunk")  :
+                    st.session_state.displayed_chunk = 0
                     st.experimental_rerun() 
-                    
-        if st.session_state.displayed_chunk != (len(st.session_state.chunks)-1) :
-            with right : 
-                if st.button(label="Next chunk")   and st.session_state.displayed_chunk < len(st.session_state.chunks) :
-                    st.session_state.displayed_chunk = st.session_state.displayed_chunk +1
+                
+            with lc : 
+                 if st.button(label="Last chunk")  :
+                     st.session_state.displayed_chunk =  len(st.session_state.chunks)-1
+                     st.experimental_rerun() 
+             
+            
+            if st.session_state.displayed_chunk != 0 : 
+                with left :  
+                    if st.button(label="Prev chunk")  :
+                        st.session_state.displayed_chunk = st.session_state.displayed_chunk -1
+                        st.experimental_rerun() 
+                        
+            if st.session_state.displayed_chunk != (len(st.session_state.chunks)-1) :
+                with right : 
+                    if st.button(label="Next chunk")   and st.session_state.displayed_chunk < len(st.session_state.chunks) :
+                        st.session_state.displayed_chunk = st.session_state.displayed_chunk +1
+                        st.experimental_rerun() 
+            with mid : 
+                 if st.button("Back to menu") : 
+                     display_menu(True)
+                     set_mission(False)
+                     st.experimental_rerun() 
+            lc, rc = st.columns ([4,1] )    
+            slider = lc.slider("Select a chunk", min_value=1, max_value=len(st.session_state.chunks), value=1)
+            # need 2 update streamlit label_visibility="collapsed"
+            with rc : 
+                if st.button(label=f"Go to chunk {slider}")  :
+                    st.session_state.displayed_chunk = slider -1
                     st.experimental_rerun() 
-        with mid : 
-             if st.button("Back to menu") : 
-                 display_menu(True)
-                 set_mission(False)
-                 st.experimental_rerun() 
-        lc, rc = st.columns ([4,1] )    
-        slider = lc.slider("Select a chunk", min_value=1, max_value=len(st.session_state.chunks), value=1)
-        # need 2 update streamlit label_visibility="collapsed"
-        with rc : 
-            if st.button(label=f"Go to chunk {slider}")  :
-                st.session_state.displayed_chunk = slider -1
-                st.experimental_rerun() 
-        
-        
+            
+        except :
+            "There is apparently no mistake in this homework ! Well done !"
         
     else : 
         

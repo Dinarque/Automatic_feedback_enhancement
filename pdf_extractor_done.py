@@ -29,7 +29,7 @@ def get_composition(pdf_file, bavard = False) :
         page_text = page.extract_text()
         # Add the page text to the overall text string
         text += page_text
-        if bavard :  print("PAGE TEXt", page_text)
+        if bavard :  print("PAGE TEXT", page_text)
     
     
     text = text.replace("\n", " ")
