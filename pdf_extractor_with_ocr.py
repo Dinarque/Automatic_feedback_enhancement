@@ -104,7 +104,8 @@ def base_extractor(pdf_file, texte):
                     thresh = sentences.index(final_sentence)
                 else :
                     indexes = [ sentences.index(sent) for sent in candidates ]
-                    final_i = min([x] for x in indexes if x >= thresh)
+                    cand = [c for c in indexes if c >= thresh]
+                    final_i = min(cand)
                     final_sentence = sentences [final_i]
                     thresh = sentences.index(final_sentence)
                 
