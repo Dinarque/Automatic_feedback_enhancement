@@ -85,16 +85,29 @@ def base_extractor(pdf_file, texte):
               
                 candidates = []
                 for sentence in sentences:
-                    if highlight in sentence or sentence in highlight:
+                    if highlight in sentence :
                         candidates.append(sentence)
+                   
+                if len(candidates) == 0 :
+                    final_sentence = highlight
+                    
+                    for sentence in sentences : 
+                        if highlight in sentence :
+                            i = sentences.index(sentence)
+                            try : final_sentence = sentences[i -1] + final_sentence 
+                            except :  print("fail")
+                            final_sentence = unite_coinciding_strings(sentence, final_sentence)
                         
-                if len(candidates) == 1 : final_sentence = candidates[0]
+                        
+                elif len(candidates) == 1 : 
+                    final_sentence = candidates[0]
+                    thresh = sentences.index(final_sentence)
                 else :
                     indexes = [ sentences.index(sent) for sent in candidates ]
                     final_i = min([x] for x in indexes if x >= thresh)
                     final_sentence = sentences [final_i]
-                thresh = sentences.index(final_sentence)
-                        
+                    thresh = sentences.index(final_sentence)
+                
                 highlights.append([highlight, final_sentence, annotation.info.get("content", "")])
 
     chunks = []
@@ -122,7 +135,24 @@ def base_extractor(pdf_file, texte):
     
  
     
-   
+def unite_coinciding_strings(string1, string2):
+    # Find the common substring
+    common_substring = ""
+    for i in range(len(string1)):
+        for j in range(len(string2)):
+            k = 0
+            while i + k < len(string1) and j + k < len(string2) and string1[i + k] == string2[j + k]:
+                k += 1
+            if k > len(common_substring):
+                common_substring = string1[i:i + k]
+
+    if common_substring:
+        # Combine the strings where they coincide
+        result = string1 + string2[len(common_substring):]
+        return result
+    else:
+        # If there's no common substring, simply concatenate the two strings
+        return string1 + string2
 
     
  

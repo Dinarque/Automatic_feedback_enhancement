@@ -354,7 +354,7 @@ else :
                 from displaying_tools import markdown_underline 
                 mkd = markdown_underline(chunk.sentence, chunk.highlight)
                 
-                l(f"Look at the following sentence :'{mkd}'. I quote your teacher : '{chunk.annot}'")
+                l(f"Look at the following sentence : I quote your teacher : '{chunk.annot}'")
          
                 "___"
                 
