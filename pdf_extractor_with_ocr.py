@@ -103,10 +103,15 @@ def base_extractor(pdf_file, texte):
                     final_sentence = candidates[0]
                     thresh = sentences.index(final_sentence)
                 else :
+                    
                     indexes = [ sentences.index(sent) for sent in candidates ]
-                    cand = [c for c in indexes if c >= thresh]
-                    final_i = min(cand)
-                    final_sentence = sentences [final_i]
+                    
+                    try : 
+                        cand = [c for c in indexes if c >= thresh]
+                        final_i = min(cand)
+                        final_sentence = sentences [final_i]
+                    except : 
+                        final_sentnce = candidates[0]
                     thresh = sentences.index(final_sentence)
                 
                 highlights.append([highlight, final_sentence, annotation.info.get("content", "")])
