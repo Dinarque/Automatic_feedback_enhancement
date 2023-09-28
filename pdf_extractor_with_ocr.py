@@ -30,7 +30,7 @@ def get_composition(pdf_file, bavard = False) :
         # Add the page text to the overall text string
         text += page_text
         if bavard :  print("PAGE TEXT", page_text)
-    
+
     
     text = text.replace("\n", " ")
     text = text.replace("  ", " ")
@@ -46,9 +46,143 @@ def get_composition(pdf_file, bavard = False) :
     
     
     return text.replace("   ", " ")
+# Main PB : get the annotated higlihht and the sentence its been extracted from 
+# annot.info.content to get the content of the message
+
+def deal_with_annotation(path) :
+    pdf_document = fitz.open(path)
+    chunks = []
+    
+    index = 0
+    for page_number in range(pdf_document.page_count):
+        page = pdf_document[page_number]
+        text = page.get_text()
+        annotations = page.annots()
+        words = page.get_text("words")
+        
+      
+        sentences = nltk.sent_tokenize(page.get_text())
+        sentences = [s.replace("\n", "") for s in sentences]
+            
+        
+        sent_to_words = sentences_to_coord(sentences, words)
+        
+        highlights = []
+        for annot in annotations: 
+            
+            
+            com = comment(index)
+            index += 1 
+            com.highlight = get_highlight(words, annot)
+            com.sentence =  assign_sentence(sentences,com.highlight, annot, sent_to_words )
+            com.annot =   annot.info.get("content", "")
+            chunks.append(com)
+            
+   
+    return  chunks
+
+def sentences_to_coord(sentences, words):
+    sent_to_words = {}
+    i = 0
+    for sent in sentences  :
+        members = []
+        for wd in sent.split(" ") :
+            members.append(words[i])
+            i += 1
+        sent_to_words[sent] = members
+        
+    return sent_to_words
+
+def pick(annot, candidates, sent_to_words) :
+    means = {}
+    score = {}
+    gold = set(annot.rect)
+    for sent in candidates : 
+        means[sent] = term_by_term_mean( [x[0:4] for x in sent_to_words[sent]])
+        score[sent] = rectangle_similarity(gold, means[sent])
+        
+    return  max(score, key=lambda k: score[k])
+
+
+    
+def rectangle_similarity(rect1_coords, rect2_coords):
+    # Convert the rectangles to sets of coordinates
+
+    # Calculate the intersection area
+    intersection = rect1_coords.intersection(rect2_coords)
+    intersection_area = len(intersection)
+
+    # Calculate the union area
+    union_area = len(rect1_coords) + len(rect2_coords) - intersection_area
+
+    # Calculate the Jaccard similarity
+    jaccard_similarity = intersection_area / union_area
+
+    return jaccard_similarity
+    
+def term_by_term_mean(list_of_lists):
+    if not list_of_lists:
+        return None  # Handle empty input list
+
+    num_lists = len(list_of_lists)
+    num_elements = len(list_of_lists[0])  # Assuming all inner lists have the same length
+
+    # Initialize a list to store the means
+    means = [0] * num_elements
+
+    # Calculate the sum of each element across all lists
+    for sublist in list_of_lists:
+        for i in range(num_elements):
+            means[i] += sublist[i]
+
+    # Divide the sum by the number of lists to get the mean
+    for i in range(num_elements):
+        means[i] /= num_lists
+
+    return means
+    
+
+def assign_sentence(sentences, highlight, annot, sent_to_words, recurse = True) :
+    
+    candidates = [sent for sent in sentences if highlight in sent]
+    if len(candidates) == 1 : return candidates [0]
+    
+    elif len(candidates) > 1 :
+        return pick (annot,candidates, sent_to_words)
+
+    
+    elif recurse == True : 
+        # the highlight is bigger than a sentence 
+        sub_highs = nltk.sent_tokenize(highlight)
+        for D in sentences : print(D)
+        print("SUBS" , sub_highs)
+        
+        subsentences = []
+        for sub in sub_highs : 
+            subsentences.append( assign_sentence(sentences, sub, annot, sent_to_words, False) )
+        
+        print("SUBS SELECTEs", subsentences)
+        return " ".join(set(subsentences))
+        
+    else : return ""
     
     
 
+def get_highlight(words, annot) : 
+    
+    content = []  
+    if len(annot.vertices) == 4:
+        highlight_coord = fitz.Quad(annot.vertices).rect
+    else : 
+        highlight_coord = annot.rect
+        
+    for wd in words :
+        if fitz.Rect(wd[0:4]).intersects(highlight_coord):
+                content.append(wd[4])           
+    content = " ".join(content)
+    
+    return content 
+    
     
 def base_extractor(pdf_file, texte):
     # Open the PDF file
@@ -59,9 +193,12 @@ def base_extractor(pdf_file, texte):
     matrix = {}
     sents = nltk.sent_tokenize(texte)
     
+    
+    
     # Iterate through each page of the PDF
     for page_number in range(pdf_document.page_count):
         page = pdf_document[page_number]
+       
         
         # Get the annotations (including highlights) on the page
         annotations = page.annots()
@@ -70,13 +207,24 @@ def base_extractor(pdf_file, texte):
         words = page.get_text("words")
 
         sentences = nltk.sent_tokenize(page.get_text())
+        sentences = [  s.replace ("\n", " ") for s in sentences  ]
         
         
         thresh = 0
         for annotation in annotations:
             
             
-                highlight = ""
+                try :
+                    all_coordinates = annotation.vertices
+                    if len(all_coordinates) == 4:
+                        highlight_coord = fitz.Quad(all_coordinates).rect
+                    highlight = [w[4] for w in words if   fitz.Rect(w[0:4]).intersects(highlight_coord)]
+                    highlight = " ".join(highlight)
+                except : 
+                    highlight = ""
+                    for word in words:
+                        if annotation.rect.intersects(word[:4]):
+                            highlight += word[4] +" "
                 closest_sentence = None
                 closest_distance = float('inf')
                 for word in words:
@@ -87,7 +235,10 @@ def base_extractor(pdf_file, texte):
                 for sentence in sentences:
                     if highlight in sentence :
                         candidates.append(sentence)
-                   
+                print(".....")
+                print(sentences)
+                print(highlight)
+                print(candidates)
                 if len(candidates) == 0 :
                     final_sentence = highlight
                     
@@ -119,11 +270,12 @@ def base_extractor(pdf_file, texte):
                 highlights.append([highlight, final_sentence, annotation.info.get("content", "")])
 
     chunks = []
-    for c in range(len(highlights)) :
-        com = comment(c)
-        com.highlight = highlights[c][0]
-        com.sentence =  highlights[c][1]
-        com.annot =  highlights[c][2]
+    for i in range(len(highlights)) :
+        
+        com = comment(i)
+        com.highlight = highlights[i][0]
+        com.sentence =  highlights[i][1]
+        com.annot =  highlights[i][2]
         chunks.append(com)
     return chunks
 

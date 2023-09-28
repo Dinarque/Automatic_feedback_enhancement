@@ -8,7 +8,7 @@ Created on Tue Aug  1 14:12:42 2023
 ## code hyperparameters
 
 Link_2_GPT = True
-dvlper_mode = True
+dvlper_mode = False
 colored = True
 
 button= False
@@ -19,7 +19,7 @@ button= False
 import streamlit as st
 import nltk
 import os
-from  pdf_extractor_with_ocr import  base_extractor , get_composition
+from  pdf_extractor_with_ocr import  deal_with_annotation , get_composition
 from dotenv import load_dotenv , find_dotenv 
 load_dotenv(find_dotenv(), override=True)
 from displaying_tools import  l, title,  colour_html, add_alinea
@@ -79,7 +79,7 @@ def launch_extraction() :
             st.session_state.str_file = get_composition("buffer.pdf")
             
             
-        st.session_state.chunks= base_extractor("buffer.pdf", st.session_state.str_file)
+        st.session_state.chunks= deal_with_annotation("buffer.pdf")
         st.session_state.nb_chunks = len(st.session_state.chunks)
 
       
@@ -90,7 +90,7 @@ def cleanse(session_state) :
     session_state.synthesis = {}
     session_state.summary = None
     session_state.vocabulary = None 
-    session_state.displayed_chunk = None
+    session_state.displayed_chunk = 0
     session_state.chunks = []
     
     
@@ -340,33 +340,31 @@ else :
     elif st.session_state.mission == "cor" :
         
         
-        
-        st.session_state.displayed_chunk = 0
+       
             
     
-        try : 
-            chunk = st.session_state.chunks [st.session_state.displayed_chunk]
-            title(f"Chunk n°{st.session_state.displayed_chunk+1}")
+        chunk = st.session_state.chunks [st.session_state.displayed_chunk]
+        title(f"Chunk n°{st.session_state.displayed_chunk+1}")
             
-            "___"
+        "___"
                  
             
-            chunk
-            
-            if colored : 
+       
+        if colored : 
                 from displaying_tools import markdown_underline 
                 mkd = markdown_underline(chunk.sentence, chunk.highlight)
                 
-                l(f"Look at the following sentence : I quote your teacher : '{chunk.annot}'")
+                l(f"Look at the following sentence : {mkd} ")
+                l(f"I quote your teacher : '{chunk.annot}'")
          
                 "___"
                 
-            else: 
+        else: 
                 
                 l(f"In the sentence '{chunk.sentence}', the segment '{chunk.highlight}' is not correct. I quote your dear teacher : '{chunk.annot}'")
                 "___"
             
-            if st.session_state.displayed_chunk not in st.session_state.chunk_analysis.keys() :
+        if st.session_state.displayed_chunk not in st.session_state.chunk_analysis.keys() :
                 z1, z2, z3 = st.columns(3) 
                 
                 with z1 : 
@@ -395,7 +393,7 @@ else :
                         correct_all(st.session_state)
                         st.experimental_rerun() 
                 
-            else: 
+        else: 
                 
               
                  
@@ -535,44 +533,44 @@ else :
                 
                
             
-            fc, left, mid, right, lc = st.columns(5)
+        fc, left, mid, right, lc = st.columns(5)
             
-            with fc : 
+        with fc : 
                 if st.button(label="First chunk")  :
                     st.session_state.displayed_chunk = 0
                     st.experimental_rerun() 
                 
-            with lc : 
+        with lc : 
                  if st.button(label="Last chunk")  :
                      st.session_state.displayed_chunk =  len(st.session_state.chunks)-1
                      st.experimental_rerun() 
              
             
-            if st.session_state.displayed_chunk != 0 : 
+        if st.session_state.displayed_chunk != 0 : 
                 with left :  
                     if st.button(label="Prev chunk")  :
                         st.session_state.displayed_chunk = st.session_state.displayed_chunk -1
                         st.experimental_rerun() 
                         
-            if st.session_state.displayed_chunk != (len(st.session_state.chunks)-1) :
+        if st.session_state.displayed_chunk != (len(st.session_state.chunks)-1) :
                 with right : 
                     if st.button(label="Next chunk")   and st.session_state.displayed_chunk < len(st.session_state.chunks) :
                         st.session_state.displayed_chunk = st.session_state.displayed_chunk +1
                         st.experimental_rerun() 
-            with mid : 
+        with mid : 
                  if st.button("Back to menu") : 
                      display_menu(True)
                      set_mission(False)
                      st.experimental_rerun() 
-            lc, rc = st.columns ([4,1] )    
-            slider = lc.slider("Select a chunk", min_value=1, max_value=len(st.session_state.chunks), value=1)
+        lc, rc = st.columns ([4,1] )    
+        slider = lc.slider("Select a chunk", min_value=1, max_value=len(st.session_state.chunks), value=1)
             # need 2 update streamlit label_visibility="collapsed"
-            with rc : 
+        with rc : 
                 if st.button(label=f"Go to chunk {slider}")  :
                     st.session_state.displayed_chunk = slider -1
                     st.experimental_rerun() 
             
-        except :
+        if len(st.session_state.chunks) == 0 :
             "There is apparently no mistake in this homework ! Well done !"
         
     else : 

@@ -1,0 +1,12 @@
+*2* 
+ {
+  'Type': 'vocabulary',
+  'Corrected Sentence': "Plus, how much could you possibly have in common?",
+  'Label': {
+    'en': ['possible'],
+    'fr': ['possible']
+  },
+  'Explanation': "The word 'possible' is misspelled in the sentence. The correct spelling is 'possibly'. 'Possibly' is an adverb that means 'in a possible manner' or 'perhaps'. In this sentence, it is used to express doubt or skepticism about having things in common. Therefore, the corrected sentence should be 'Plus, how much could you possibly have in common?'"
+}  
+ 
+ 
