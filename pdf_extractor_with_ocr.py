@@ -169,7 +169,7 @@ def assign_sentence(sentences, highlight, annot, sent_to_words, recurse = True) 
     
 
 def get_highlight(words, annot) : 
-    
+    if annot == None : return None 
     content = []  
     if len(annot.vertices) == 4:
         highlight_coord = fitz.Quad(annot.vertices).rect

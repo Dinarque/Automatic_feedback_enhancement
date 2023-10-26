@@ -10,3 +10,12 @@
 }  
  
  
+*1* 
+ {
+  'Type': 'grammar',
+  'Corrected Sentence': "My opinion is that at 25, you still look like their child. Plus, how much could you possibly have in common? What I think is strange is when a much older man dates someone who is 25 or younger.",
+  'Label': 'Incorrect word order and missing words',
+  'Explanation': "In the original sentence, the word order is incorrect and some words are missing. The correct word order is 'My opinion is that at 25, you still look like their child.' The word 'possible' should be changed to 'possibly' to match the adverb 'could'. The phrase 'What I think is strange' should be used instead of 'What think is strange'. Finally, the word 'when' should be used instead of the vertical bar '|'."
+}  
+ 
+ 
