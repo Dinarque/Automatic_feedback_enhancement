@@ -20,7 +20,7 @@ button= False
 import streamlit as st
 import nltk
 import os
-from  pdf_extractor_done import  deal_with_annotation , get_composition
+from  pdf_extractor_with_ocr import  deal_with_annotation , get_composition
 from dotenv import load_dotenv , find_dotenv 
 load_dotenv(find_dotenv(), override=True)
 from displaying_tools import  l, title,  colour_html, add_alinea

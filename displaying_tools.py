@@ -9,13 +9,15 @@ import streamlit as st
 def markdown_underline(sentence, segment, colour = "yellow" ) :
     
     if segment in sentence : 
-        store = sentence.split(segment)
-        """
-        mkd = f"{store[0]}**:{colour}[{segment}]**{store[1]}"
-        """
-        mkd = f'{store[0]}**<span style="color:{colour};">{segment}</span>**{store[1]}'
-        store.append("")
-        return mkd
+        try : 
+            store = sentence.split(segment)
+            """
+            mkd = f"{store[0]}**:{colour}[{segment}]**{store[1]}"
+            """
+            mkd = f'{store[0]}**<span style="color:{colour};">{segment}</span>**{store[1]}'
+            store.append("")
+            return mkd
+        except : return sentence
 
     else : return sentence
     
