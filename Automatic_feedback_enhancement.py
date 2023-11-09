@@ -497,7 +497,7 @@ else :
                                 
                             exo, cb = create_exo(dic, st.session_state.summary)
                             update_cost(st.session_state, cb)
-                            try : dic["Exo"] = eval(exo)
+                            try : dic["Exo"] = str(exo) #eval
                             except : 
                                 exo, cb = create_exo(dic, st.session_state.summary)
                                 dic["Exo"] = str(exo)
