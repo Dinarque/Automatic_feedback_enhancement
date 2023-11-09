@@ -430,7 +430,8 @@ else :
                     "___"
                     
                     st.subheader("Exercise :")
-                    dic["Exo"]["exercise"]
+                    dic["Exo"]
+                    """["exercise"]
                     "\n \n"
                     disp = False 
                     if st.button ("Display answer key") :
@@ -439,7 +440,7 @@ else :
                         st.subheader("Answer key :")
                         dic["Exo"]["answer_key"]
                     
-                
+                    """
                 
                 
                 if "Chat" in dic.keys() : 
