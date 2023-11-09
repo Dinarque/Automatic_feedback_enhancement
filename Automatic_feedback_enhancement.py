@@ -499,7 +499,7 @@ else :
                             try : dic["Exo"] = eval(exo)
                             except : 
                                 exo, cb = create_exo(dic, st.session_state.summary)
-                                dic["Exo"] = eval(exo)
+                                dic["Exo"] = str(exo)
                                 update_cost(st.session_state, cb)
                             st.session_state.chunk_analysis[st.session_state.displayed_chunk] = dic
                             update_log(st.session_state.log_path, f'*{st.session_state.displayed_chunk+1}* \n {st.session_state.chunk_analysis[st.session_state.displayed_chunk]}  \n \n \n', )
