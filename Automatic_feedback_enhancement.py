@@ -127,7 +127,7 @@ st.title("Automatic Feedback Enhancement")
 if dvlper_mode : st.session_state
 "___"
 
-
+st.session_state
 
 ## sidebar
 with st.sidebar : 
